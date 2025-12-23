@@ -6,6 +6,9 @@ import CuratedContent from "../components/CuratedContent";
 import HighLevelRepurposing from "../components/HighLevelRepurposing";
 import TrailersLongForm from "../components/TrailersLongForm";
 import ProblemsWeSolve from "../components/ProblemsWesolve";
+import TheGoal from "../components/TheGoal";
+import ClientTestimonials from "../components/ClientTestimonials";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +19,9 @@ export default function Home() {
       <HighLevelRepurposing />
       <TrailersLongForm />
       <ProblemsWeSolve />
+      <TheGoal />
+      <ClientTestimonials />
+      <Footer />
     </div>
   );
 }
