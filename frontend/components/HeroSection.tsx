@@ -2,21 +2,21 @@
 
 import React from "react";
 import { Button } from "./ui/Button";
-import FannedCards from "./FannedCards";
+import { Iphone } from "./ui/iphone";
 import FloatingBadge from "./FloatingBadge";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[calc(100vh-100px)] flex items-center justify-center py-20 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative min-h-screen flex items-center justify-center py-12 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left Side: Text Content */}
-        <div className="space-y-8 text-center lg:text-left relative z-10">
-          <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold leading-tight text-gray-900 dark:text-white">
+        <div className="space-y-6 text-center lg:text-left relative z-10">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white" style={{ fontFamily: 'var(--font-family-serif)' }}>
             Discover the art of{" "}
             <span className="italic">strategy</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0">
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0" style={{ fontFamily: 'var(--font-family-sans)' }}>
             Join a community of creative strategists and build your portfolio with elegant, data-driven solutions.
           </p>
 
@@ -31,18 +31,20 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Side: Fanned Cards with Floating Badges */}
-        <div className="relative flex items-center justify-center">
-          <FannedCards />
+        {/* Right Side: iPhone with Floating Badges */}
+        <div className="relative flex items-center justify-center h-[500px] lg:h-[600px]">
+          <div className="w-[280px] sm:w-[320px] lg:w-[360px]">
+            <Iphone videoSrc="https://videos.pexels.com/video-files/8946986/8946986-uhd_1440_2732_25fps.mp4" />
+          </div>
           
           {/* Floating Badges */}
           <FloatingBadge 
             text="@coplin" 
-            className="top-8 right-12 animate-float-slow"
+            className="top-8 right-4 lg:right-12 animate-float-slow"
           />
           <FloatingBadge 
             text="@andrea" 
-            className="bottom-16 left-8 animate-float-delayed"
+            className="bottom-16 left-4 lg:left-8 animate-float-delayed"
           />
         </div>
       </div>
