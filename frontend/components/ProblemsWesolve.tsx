@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import dynamic from "next/dynamic";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 // Dynamically import the 3D component to avoid SSR issues
 const Holoboard3D = dynamic(() => import("./Holoboard3D"), {
@@ -60,6 +61,20 @@ export default function ProblemsWeSolve() {
     };
   }, []);
 
+  useGsapTimeline(sectionRef, ({ gsap }) => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+
+    tl.from(".holoboard-shell", { opacity: 0, y: 50, duration: 0.9 })
+      .from(".problems-tagline", { opacity: 0, y: 30, duration: 0.7 }, "-=0.45")
+      .from(".problems-card", { opacity: 0, y: 35, duration: 0.65, stagger: 0.12 }, "-=0.3");
+  }, []);
+
   const teamMembers = [
     "Lead Creatives",
     "World-class Editors",
@@ -82,7 +97,7 @@ export default function ProblemsWeSolve() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
           
           {/* Left Side - 3D Model */}
-          <div className="relative h-[600px] order-1 lg:order-1">
+          <div className="holoboard-shell relative h-[600px] order-1 lg:order-1">
             <div className="absolute inset-0 flex items-center justify-center">
               <div 
                 className="w-full h-full transition-opacity duration-1000"
@@ -98,7 +113,7 @@ export default function ProblemsWeSolve() {
           {/* Right Side - List */}
           <div className="relative flex items-center justify-center order-2 lg:order-2">
             <div className="w-full max-w-lg">
-              <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light"> 
+              <p className="problems-tagline text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light"> 
                 Think of an in house content team, that you don't have to manage.
               </p>
               
@@ -106,7 +121,7 @@ export default function ProblemsWeSolve() {
                 {teamMembers.map((member, index) => (
                   <div
                     key={index}
-                    className={`group relative transition-all duration-700 ${
+                    className={`problems-card group relative transition-all duration-700 ${
                       visibleCards.includes(index + 1)
                         ? 'opacity-100 translate-x-0'
                         : 'opacity-0 -translate-x-12'

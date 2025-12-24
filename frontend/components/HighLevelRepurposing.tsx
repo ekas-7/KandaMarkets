@@ -1,16 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useTheme } from "./ThemeProvider";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import React, { useRef, useState } from "react";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function HighLevelRepurposing() {
-  const { theme } = useTheme();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isContainerHovered, setIsContainerHovered] = useState(false);
@@ -59,26 +52,21 @@ export default function HighLevelRepurposing() {
       align: "right",
     },
   ];
-  
-  useEffect(() => {
-    if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.5,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }, sectionRef);
+  useGsapTimeline(sectionRef, ({ gsap }) => {
+    const rows = gsap.utils.toArray<HTMLElement>(".repurpose-row");
 
-    return () => ctx.revert();
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+
+    tl.from(".repurpose-kicker", { y: 20, opacity: 0, duration: 0.6 })
+      .from(rows, { opacity: 0, y: 35, duration: 0.7, stagger: 0.12 }, "-=0.2")
+      .from(".repurpose-footer", { opacity: 0, y: 20, duration: 0.6 }, "-=0.25");
   }, []);
   
   return (
@@ -89,7 +77,7 @@ export default function HighLevelRepurposing() {
       <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
         <div className="mb-16 text-left">
-          <p className="text-sm font-light tracking-wider mb-4 text-gray-400 uppercase"> 
+          <p className="repurpose-kicker text-sm font-light tracking-wider mb-4 text-gray-400 uppercase"> 
             OUR SERVICES
           </p>
         </div>
@@ -106,13 +94,15 @@ export default function HighLevelRepurposing() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative border-b border-gray-800 py-6 cursor-pointer group transition-all duration-500"
+              className="repurpose-row relative border-b border-gray-800 py-6 cursor-pointer group"
               style={{
                 opacity: isContainerHovered 
                   ? hoveredIndex === index 
                     ? 1 
                     : 0.3
-                  : 1
+                  : 1,
+                transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: isContainerHovered ? 'opacity' : 'auto',
               }}
               onMouseEnter={() => setHoveredIndex(index)}
             >
@@ -125,19 +115,24 @@ export default function HighLevelRepurposing() {
                     
                     {/* Animated Vertical Bar */}
                     <div 
-                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent transition-all duration-500`}
+                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
                       style={{
                         width: hoveredIndex === index ? '4px' : '2px',
                         opacity: hoveredIndex === index ? 1 : 0.5,
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        willChange: hoveredIndex === index ? 'width, opacity' : 'auto',
                       }}
                     ></div>
 
                     {/* Image Container - Expands on Hover */}
                     <div 
-                      className="h-24 rounded-lg overflow-hidden transition-all duration-700 ease-out"
+                      className="h-24 rounded-lg overflow-hidden"
                       style={{
                         width: hoveredIndex === index ? '160px' : '0px',
                         opacity: hoveredIndex === index ? 1 : 0,
+                        transform: hoveredIndex === index ? 'scale(1)' : 'scale(0.95)',
+                        transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        willChange: hoveredIndex === index ? 'width, opacity, transform' : 'auto',
                       }}
                     >
                       <div 
@@ -159,7 +154,11 @@ export default function HighLevelRepurposing() {
 
                     {/* Title - Slides Right as Image Expands */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line transition-all duration-700 tracking-tight"
+                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line tracking-tight"
+                      style={{
+                        transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        willChange: hoveredIndex === index ? 'transform' : 'auto',
+                      }}
                     >
                       {service.title}
                     </h2>
@@ -167,10 +166,11 @@ export default function HighLevelRepurposing() {
 
                   {/* Right Side: Discover Button - Fades In on Hover */}
                   <div 
-                    className="transition-all duration-500 ease-out"
                     style={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(20px)',
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      willChange: hoveredIndex === index ? 'opacity, transform' : 'auto',
                     }}
                   >
                     <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
@@ -189,19 +189,24 @@ export default function HighLevelRepurposing() {
                     
                     {/* Animated Vertical Bar */}
                     <div 
-                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent transition-all duration-500`}
+                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
                       style={{
                         width: hoveredIndex === index ? '4px' : '2px',
                         opacity: hoveredIndex === index ? 1 : 0.5,
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        willChange: hoveredIndex === index ? 'width, opacity' : 'auto',
                       }}
                     ></div>
 
                     {/* Image Container - Expands on Hover */}
                     <div 
-                      className="h-24 rounded-lg overflow-hidden transition-all duration-700 ease-out"
+                      className="h-24 rounded-lg overflow-hidden"
                       style={{
                         width: hoveredIndex === index ? '160px' : '0px',
                         opacity: hoveredIndex === index ? 1 : 0,
+                        transform: hoveredIndex === index ? 'scale(1)' : 'scale(0.95)',
+                        transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        willChange: hoveredIndex === index ? 'width, opacity, transform' : 'auto',
                       }}
                     >
                       <div 
@@ -223,7 +228,11 @@ export default function HighLevelRepurposing() {
 
                     {/* Title - Slides Left as Image Expands */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line text-right transition-all duration-700 tracking-tight"
+                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line text-right tracking-tight"
+                      style={{
+                        transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        willChange: hoveredIndex === index ? 'transform' : 'auto',
+                      }}
                     >
                       {service.title}
                     </h2>
@@ -231,10 +240,11 @@ export default function HighLevelRepurposing() {
 
                   {/* Left Side: Discover Button - Fades In on Hover */}
                   <div 
-                    className="transition-all duration-500 ease-out"
                     style={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(-20px)',
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      willChange: hoveredIndex === index ? 'opacity, transform' : 'auto',
                     }}
                   >
                     <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
@@ -258,7 +268,7 @@ export default function HighLevelRepurposing() {
 
         {/* Bottom Subtitle */}
         <div className="mt-16 text-center">
-          <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
+          <p className="repurpose-footer text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
              style={{ fontFamily: 'var(--font-family-sans)' }}>
             Hover to explore our innovative solutions across multiple platforms
           </p>

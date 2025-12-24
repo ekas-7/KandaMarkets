@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function TrailersLongForm() {
   const { theme } = useTheme();
-  const [hoveredVideo, setHoveredVideo] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [, setHoveredVideo] = useState<number | null>(null);
 
   const videos = [
     {
@@ -29,23 +31,43 @@ export default function TrailersLongForm() {
     },
   ];
 
+  useGsapTimeline(sectionRef, ({ gsap }) => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 78%",
+      },
+    });
+
+    tl.from(".trailers-heading", { y: 50, opacity: 0, duration: 0.8 })
+      .from(".trailers-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.35")
+      .from(".trailer-card", { y: 40, opacity: 0, duration: 0.65, stagger: 0.12, rotate: (i: number) => (i % 2 ? 1.5 : -1.5) }, "-=0.2")
+      .from(".impact-title", { y: 40, opacity: 0, duration: 0.7 }, "-=0.1")
+      .from(".impact-copy", { y: 30, opacity: 0, duration: 0.65, stagger: 0.08 }, "-=0.2")
+      .from(".impact-video", { y: 50, opacity: 0, scale: 0.95, duration: 0.8 }, "-=0.25");
+  }, [theme]);
+
   return (
-    <section className={`relative min-h-screen w-full flex items-center justify-center py-24 px-6 transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-    }`}>
+    <section
+      ref={sectionRef}
+      className={`relative min-h-screen w-full flex items-center justify-center py-24 px-6 transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+      }`}
+    >
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32">
         
         {/* Top Section - Trailers and Long form */}
         <div className="space-y-12">
           {/* Header */}
           <div>
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-5 transition-colors duration-300 tracking-tight ${
+            <h2 className={`trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-5 transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
               Trailers and <span className="text-yellow-400 font-light italic font-eb-garamond">Long form</span>
               
             </h2>
-            <p className={`text-sm sm:text-base md:text-lg max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
+            <p className={`trailers-sub text-sm sm:text-base md:text-lg max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
             }`}>
               Podcast trailers, B2B videos and more
@@ -57,7 +79,7 @@ export default function TrailersLongForm() {
             {videos.map((video) => (
               <div
                 key={video.id}
-                className={`relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${
+                className={`trailer-card relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${
                   theme === 'dark' ? 'bg-gray-900' : 'bg-gray-200'
                 }`}
                 onMouseEnter={() => setHoveredVideo(video.id)}
@@ -182,17 +204,17 @@ export default function TrailersLongForm() {
         </div>
 
         {/* Bottom Section - Launch With Impact */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium transition-colors duration-300 tracking-tight ${
+              <h2 className={`impact-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
               Launch With <span className="text-yellow-400 font-light italic font-eb-garamond">Impact</span>
               
             </h2>
             
-            <p className={`text-sm sm:text-base md:text-lg max-w-2xl transition-colors duration-300 font-light leading-relaxed ${
+            <p className={`impact-copy text-sm sm:text-base md:text-lg max-w-2xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
             }`}>
               We craft compelling stories that build anticipation, drive traffic and convert your audience with the best in class launch videos.
@@ -206,7 +228,7 @@ export default function TrailersLongForm() {
           </div>
 
           {/* Right Video */}
-          <div className={`relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${
+          <div className={`impact-video relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${
             theme === 'dark' ? 'bg-gray-900' : 'bg-gray-200'
           }`}>
             <div className="relative aspect-video">

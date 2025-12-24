@@ -1,16 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 interface NavigationProps {
   className?: string;
 }
 
 export default function Navigation({ className }: NavigationProps) {
+  const navRef = useRef<HTMLElement>(null);
+
+  useGsapTimeline(navRef, ({ gsap }) => {
+    gsap.fromTo(
+      navRef.current,
+      { y: -32, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+  }, []);
+
   return (
-    <nav className={cn("w-full py-6 px-8", className)}>
+    <nav ref={navRef} className={cn("w-full py-6 px-8", className)}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">

@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function ClientTestimonials() {
+  const sectionRef = useRef<HTMLElement>(null);
 
   const testimonials = [
     {
@@ -83,8 +85,28 @@ export default function ClientTestimonials() {
     );
   };
 
+  useGsapTimeline(sectionRef, ({ gsap }) => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 78%",
+      },
+    });
+
+    tl.from(".goal-title", { y: 50, opacity: 0, duration: 0.8 })
+      .from(".goal-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.35")
+      .from(".goal-point", { y: 25, opacity: 0, duration: 0.6, stagger: 0.12 }, "-=0.25")
+      .from(".testimonial-heading", { y: 40, opacity: 0, duration: 0.75 }, "-=0.2")
+      .from(".testimonial-sub", { y: 24, opacity: 0, duration: 0.6 }, "-=0.25")
+      .from(".testimonial-card", { y: 40, opacity: 0, duration: 0.7, stagger: 0.08 }, "-=0.2");
+  }, []);
+
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center py-24 lg:py-32 px-6 bg-black">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen w-full flex items-center justify-center py-24 lg:py-32 px-6 bg-black"
+    >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
       
@@ -96,33 +118,33 @@ export default function ClientTestimonials() {
           {/* Left Side - Heading */}
           <div className="space-y-4">
             <div className="flex items-baseline gap-3">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+              <h2 className="goal-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
                 The <span className="text-yellow-400 font-light italic font-eb-garamond">Goal</span>
               </h2>
               {/* Decorative lines */}
               
             </div>
             
-            <p className="text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
+            <p className="goal-sub text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
               We become your brains and brawn.
             </p>
           </div>
 
           {/* Right Side - Content Points */}
           <div className="space-y-8">
-            <div>
+            <div className="goal-point">
               <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-medium leading-tight"> 
                 Max content output with minimal input.
               </h3>
             </div>
 
-            <div>
+            <div className="goal-point">
               <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
                 Our clients typically film 3-5 hours a month, we take care of the rest. In other cases, they have footage and need no extra work.
               </p>
             </div>
 
-            <div>
+            <div className="goal-point">
               <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
                 Growth focused organic content that brings results. Always.
               </p>
@@ -133,14 +155,14 @@ export default function ClientTestimonials() {
         {/* Testimonials Section Header */}
         <div className="mb-16 lg:mb-20">
           <div className="flex items-baseline gap-3 mb-6">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+            <h2 className="testimonial-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
               Client <span className="text-yellow-400 font-light italic font-eb-garamond">Testimonials</span>
             </h2>
             {/* Decorative lines */}
            
           </div>
           
-          <p className="text-lg sm:text-xl text-gray-300 font-light"> 
+          <p className="testimonial-sub text-lg sm:text-xl text-gray-300 font-light"> 
             Hear from their experience
           </p>
         </div>
@@ -150,7 +172,7 @@ export default function ClientTestimonials() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-yellow-400/30"
+              className="testimonial-card group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-yellow-400/30"
             >
               {/* Testimonial Text */}
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 font-light"> 

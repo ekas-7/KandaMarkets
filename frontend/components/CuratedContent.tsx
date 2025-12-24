@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { useTheme } from "./ThemeProvider";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function CuratedContent() {
   const { theme } = useTheme();
+  const sectionRef = useRef<HTMLElement>(null);
   
   const videos = [
     {
@@ -33,20 +35,45 @@ export default function CuratedContent() {
     },
   ];
 
+  useGsapTimeline(sectionRef, ({ gsap }) => {
+    const cards = gsap.utils.toArray<HTMLElement>(".curated-card");
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%",
+      },
+    });
+
+    tl.from(".curated-heading", { y: 50, opacity: 0, duration: 0.8, ease: "power3.out" })
+      .from(".curated-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.4")
+      .from(cards, {
+        y: 40,
+        opacity: 0,
+        rotate: (i: number) => (i % 2 === 0 ? -3 : 3),
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power3.out",
+      }, "-=0.2");
+  }, [theme]);
+
   return (
-    <section className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-    }`}>
+    <section
+      ref={sectionRef}
+      className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+      }`}
+    >
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center">
         {/* Header */}
         <div className="mb-12">
-          <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
+          <h2 className={`curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-gray-900'
           }`}>
             Curated <span className="text-yellow-400 font-normal italic font-eb-garamond">short form</span> content
             
           </h2>
-          <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
+          <p className={`curated-sub text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           }`}>
             We help with creative direction and/or ideate, script and post produce.
@@ -58,7 +85,7 @@ export default function CuratedContent() {
           {videos.map((video) => (
             <div
               key={video.id}
-              className="relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl bg-gray-800 aspect-[9/16] transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+              className="curated-card relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl bg-gray-800 aspect-[9/16] transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
             >
               {/* Video Thumbnail */}
               <div className="absolute inset-0">

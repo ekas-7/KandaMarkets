@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { useTheme } from "./ThemeProvider";
+import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function Footer() {
   const { theme } = useTheme();
+  const footerRef = useRef<HTMLElement>(null);
 
   const navigationLinks = [
     { name: "Process", href: "#process" },
@@ -52,19 +54,37 @@ export default function Footer() {
     },
   ];
 
+  useGsapTimeline(footerRef, ({ gsap }) => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top 85%",
+      },
+    });
+
+    tl.from(".footer-brand", { opacity: 0, y: 20, duration: 0.6 })
+      .from(".footer-links a", { opacity: 0, y: 18, stagger: 0.08, duration: 0.55 }, "-=0.25")
+      .from(".footer-social a", { opacity: 0, y: 14, stagger: 0.06, duration: 0.5 }, "-=0.25")
+      .from(".footer-bottom", { opacity: 0, y: 16, duration: 0.6 }, "-=0.2");
+  }, []);
+
   return (
-    <footer className={`relative w-full border-t transition-colors duration-300 ${
+    <footer
+      ref={footerRef}
+      className={`relative w-full border-t transition-colors duration-300 ${
       theme === 'dark' 
         ? 'bg-black border-gray-800' 
         : 'bg-gray-900 border-gray-700'
-    }`}>
+    }`}
+    >
       <div className="w-full max-w-6xl mx-auto px-6 py-12">
         
         {/* Top Section - Logo and Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 pb-12 border-b border-gray-800">
           
           {/* Logo and Brand */}
-          <div className="flex items-center gap-3">
+          <div className="footer-brand flex items-center gap-3">
             {/* Logo Icon */}
             <div className="w-10 h-10 flex items-center justify-center">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -80,7 +100,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-wrap gap-6 md:gap-8">
+          <nav className="footer-links flex flex-wrap gap-6 md:gap-8">
             {navigationLinks.map((link) => (
               <a
                 key={link.name}
@@ -93,7 +113,7 @@ export default function Footer() {
           </nav>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="footer-social flex items-center gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -110,7 +130,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section - Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+  <div className="footer-bottom flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-gray-400 font-light">
             © 2025 Kanda Speaks. All rights reserved.
           </p>
