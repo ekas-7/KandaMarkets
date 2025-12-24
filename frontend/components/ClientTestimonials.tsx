@@ -96,9 +96,8 @@ export default function ClientTestimonials() {
           {/* Left Side - Heading */}
           <div className="space-y-4">
             <div className="flex items-baseline gap-3">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight" 
-                  style={{ fontFamily: 'var(--font-family-serif)' }}>
-                The <span className="text-yellow-400">Goal</span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+                The <span className="text-yellow-400 font-light italic">Goal</span>
               </h2>
               {/* Decorative lines */}
               <div className="flex flex-col gap-1.5 mb-4">
@@ -107,8 +106,7 @@ export default function ClientTestimonials() {
               </div>
             </div>
             
-            <p className="text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed" 
-               style={{ fontFamily: 'var(--font-family-sans)' }}>
+            <p className="text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
               We become your brains and brawn.
             </p>
           </div>
@@ -116,22 +114,19 @@ export default function ClientTestimonials() {
           {/* Right Side - Content Points */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-semibold leading-tight" 
-                  style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-medium leading-tight"> 
                 Max content output with minimal input.
               </h3>
             </div>
 
             <div>
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed" 
-                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
                 Our clients typically film 3-5 hours a month, we take care of the rest. In other cases, they have footage and need no extra work.
               </p>
             </div>
 
             <div>
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed" 
-                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
                 Growth focused organic content that brings results. Always.
               </p>
             </div>
@@ -141,9 +136,8 @@ export default function ClientTestimonials() {
         {/* Testimonials Section Header */}
         <div className="mb-16 lg:mb-20">
           <div className="flex items-baseline gap-3 mb-6">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight" 
-                style={{ fontFamily: 'var(--font-family-serif)' }}>
-              Client <span className="text-yellow-400">Testimonials</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+              Client <span className="text-yellow-400 font-light italic">Testimonials</span>
             </h2>
             {/* Decorative lines */}
             <div className="flex flex-col gap-1.5 mb-4">
@@ -152,8 +146,7 @@ export default function ClientTestimonials() {
             </div>
           </div>
           
-          <p className="text-lg sm:text-xl text-gray-300" 
-             style={{ fontFamily: 'var(--font-family-sans)' }}>
+          <p className="text-lg sm:text-xl text-gray-300 font-light"> 
             Hear from their experience
           </p>
         </div>
@@ -166,20 +159,17 @@ export default function ClientTestimonials() {
               className="group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-yellow-400/30"
             >
               {/* Testimonial Text */}
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4" 
-                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 font-light"> 
                 {highlightText(testimonial.text, testimonial.highlight)}
               </p>
 
               {/* Author Info */}
               {testimonial.author && (
                 <div className="border-t border-gray-700/50 pt-4">
-                  <p className="text-white font-semibold text-sm sm:text-base mb-1" 
-                     style={{ fontFamily: 'var(--font-family-sans)' }}>
+                  <p className="text-white font-medium text-sm sm:text-base mb-1"> 
                     {testimonial.author}
                   </p>
-                  <p className="text-gray-400 text-xs sm:text-sm" 
-                     style={{ fontFamily: 'var(--font-family-sans)' }}>
+                  <p className="text-gray-400 text-xs sm:text-sm font-light"> 
                     {testimonial.role}
                   </p>
                 </div>

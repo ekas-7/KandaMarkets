@@ -40,19 +40,19 @@ export default function CuratedContent() {
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center">
         {/* Header */}
         <div className="mb-12">
-          <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 md:mb-4 transition-colors duration-300 ${
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`} style={{ fontFamily: 'var(--font-family-serif)' }}>
-            Curated <span className="text-yellow-400">short form</span> content
+          }`}>
+            Curated <span className="text-yellow-400 font-normal italic">short form</span> content
             <span className="inline-block ml-2 align-middle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
                 <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </span>
           </h2>
-          <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 ${
+          <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-          }`} style={{ fontFamily: 'var(--font-family-sans)' }}>
+          }`}>
             We help with creative direction and/or ideate, script and post produce.
           </p>
         </div>
@@ -85,16 +85,16 @@ export default function CuratedContent() {
 
               {/* Text overlay - middle */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
-                <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight" style={{ fontFamily: 'var(--font-family-serif)' }}>
+                <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
                   {video.caption.split(video.highlight)[0]}
-                  <span className="text-yellow-400 italic">{video.highlight}</span>
+                  <span className="text-yellow-400 italic font-light">{video.highlight}</span>
                   {video.caption.split(video.highlight)[1]}
                 </p>
               </div>
 
               {/* Caption at bottom */}
               <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
-                <p className="text-white text-xs sm:text-sm leading-tight" style={{ fontFamily: 'var(--font-family-sans)' }}>
+                <p className="text-white text-xs sm:text-sm leading-tight font-light">
                   {video.caption}
                 </p>
               </div>

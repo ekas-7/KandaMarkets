@@ -11,12 +11,12 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left Side: Text Content */}
         <div className="space-y-6 text-center lg:text-left relative z-10">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white font-serif">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal leading-tight text-gray-900 dark:text-white tracking-tight">
             Discover the art of{" "}
-            <span className="italic">strategy</span>
+            <span className="italic font-light">strategy</span>
           </h1>
           
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 font-sans">
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
             Join a community of creative strategists and build your portfolio with elegant, data-driven solutions.
           </p>
 

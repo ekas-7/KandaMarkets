@@ -98,8 +98,7 @@ export default function ProblemsWeSolve() {
           {/* Right Side - List */}
           <div className="relative flex items-center justify-center order-2 lg:order-2">
             <div className="w-full max-w-lg">
-              <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed" 
-                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light"> 
                 Think of an in house content team, that you don't have to manage.
               </p>
               
@@ -131,8 +130,7 @@ export default function ProblemsWeSolve() {
                       
                       {/* Content */}
                       <div className="relative flex items-center justify-between">
-                        <span className="text-xl md:text-2xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300"
-                              style={{ fontFamily: 'var(--font-family-sans)' }}>
+                        <span className="text-xl md:text-2xl font-medium text-white group-hover:text-blue-300 transition-colors duration-300">
                           {member}
                         </span>
                         

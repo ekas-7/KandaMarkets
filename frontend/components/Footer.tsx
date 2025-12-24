@@ -74,8 +74,7 @@ export default function Footer() {
             </div>
             
             {/* Brand Name */}
-            <span className="text-white text-xl md:text-2xl font-bold" 
-                  style={{ fontFamily: 'var(--font-family-sans)' }}>
+            <span className="text-white text-xl md:text-2xl font-medium"> 
               Kanda Speaks
             </span>
           </div>
@@ -86,8 +85,7 @@ export default function Footer() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm md:text-base"
-                style={{ fontFamily: 'var(--font-family-sans)' }}
+                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm md:text-base font-light"
               >
                 {link.name}
               </a>
@@ -113,12 +111,11 @@ export default function Footer() {
 
         {/* Bottom Section - Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p className="text-gray-400" style={{ fontFamily: 'var(--font-family-sans)' }}>
+          <p className="text-gray-400 font-light">
             © 2025 Kanda Speaks. All rights reserved.
           </p>
           
-          <p className="text-gray-400 flex items-center gap-2" 
-             style={{ fontFamily: 'var(--font-family-sans)' }}>
+          <p className="text-gray-400 flex items-center gap-2 font-light"> 
             Made with <span className="text-red-500">❤️</span> by{" "}
             <a 
               href="https://github.com/ekas-7" 

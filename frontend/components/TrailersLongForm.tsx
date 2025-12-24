@@ -39,19 +39,19 @@ export default function TrailersLongForm() {
         <div className="space-y-8">
           {/* Header */}
           <div>
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 md:mb-4 transition-colors duration-300 ${
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`} style={{ fontFamily: 'var(--font-family-serif)' }}>
-              Trailers and <span className="text-yellow-400">Long form</span>
+            }`}>
+              Trailers and <span className="text-yellow-400 font-light italic">Long form</span>
               <span className="inline-block ml-2 align-middle">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
                   <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </span>
             </h2>
-            <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 ${
+            <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-            }`} style={{ fontFamily: 'var(--font-family-sans)' }}>
+            }`}>
               Podcast trailers, B2B videos and more
             </p>
           </div>
@@ -89,7 +89,7 @@ export default function TrailersLongForm() {
 
                   {/* Caption overlay */}
                   <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 right-3 md:right-4 z-10">
-                    <p className="text-white text-sm md:text-base leading-tight" style={{ fontFamily: 'var(--font-family-sans)' }}>
+                    <p className="text-white text-sm md:text-base leading-tight font-light">
                       {video.caption}
                     </p>
                   </div>
@@ -189,10 +189,10 @@ export default function TrailersLongForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold transition-colors duration-300 ${
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`} style={{ fontFamily: 'var(--font-family-serif)' }}>
-              Launch With <span className="text-yellow-400">Impact</span>
+            }`}>
+              Launch With <span className="text-yellow-400 font-light italic">Impact</span>
               <span className="inline-block ml-2 align-middle">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
                   <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -200,14 +200,14 @@ export default function TrailersLongForm() {
               </span>
             </h2>
             
-            <p className={`text-base sm:text-lg md:text-xl max-w-2xl transition-colors duration-300 ${
+            <p className={`text-base sm:text-lg md:text-xl max-w-2xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-            }`} style={{ fontFamily: 'var(--font-family-sans)' }}>
+            }`}>
               We craft compelling stories that build anticipation, drive traffic and convert your audience with the best in class launch videos.
             </p>
 
             <div>
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl" style={{ fontFamily: 'var(--font-family-sans)' }}>
+              <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 Book a Discovery Call
               </button>
             </div>
@@ -238,14 +238,14 @@ export default function TrailersLongForm() {
 
               {/* Text overlay - center */}
               <div className="absolute inset-0 flex items-center justify-center px-6">
-                <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center leading-tight" style={{ fontFamily: 'var(--font-family-serif)' }}>
-                  into days of <span className="text-yellow-400">education</span>
+                <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-tight">
+                  into days of <span className="text-yellow-400 font-light italic">education</span>
                 </p>
               </div>
 
               {/* Caption at bottom */}
               <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 right-3 md:right-4 z-10">
-                <p className="text-white text-sm md:text-base leading-tight" style={{ fontFamily: 'var(--font-family-sans)' }}>
+                <p className="text-white text-sm md:text-base leading-tight font-light">
                   sessions into days of education for
                 </p>
               </div>

@@ -89,8 +89,7 @@ export default function HighLevelRepurposing() {
       <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
         <div className="mb-16 text-left">
-          <p className="text-sm font-medium tracking-wider mb-4 text-gray-400 uppercase" 
-             style={{ fontFamily: 'var(--font-family-sans)' }}>
+          <p className="text-sm font-light tracking-wider mb-4 text-gray-400 uppercase"> 
             OUR SERVICES
           </p>
         </div>
@@ -160,10 +159,7 @@ export default function HighLevelRepurposing() {
 
                     {/* Title - Slides Right as Image Expands */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-none whitespace-pre-line transition-all duration-700"
-                      style={{ 
-                        fontFamily: 'var(--font-family-serif)',
-                      }}
+                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line transition-all duration-700 tracking-tight"
                     >
                       {service.title}
                     </h2>
@@ -177,7 +173,7 @@ export default function HighLevelRepurposing() {
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(20px)',
                     }}
                   >
-                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-semibold tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
+                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
                       Discover
                     </button>
                   </div>
@@ -227,10 +223,7 @@ export default function HighLevelRepurposing() {
 
                     {/* Title - Slides Left as Image Expands */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-none whitespace-pre-line text-right transition-all duration-700"
-                      style={{ 
-                        fontFamily: 'var(--font-family-serif)',
-                      }}
+                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line text-right transition-all duration-700 tracking-tight"
                     >
                       {service.title}
                     </h2>
@@ -244,7 +237,7 @@ export default function HighLevelRepurposing() {
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(-20px)',
                     }}
                   >
-                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-semibold tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
+                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
                       Discover
                     </button>
                   </div>
