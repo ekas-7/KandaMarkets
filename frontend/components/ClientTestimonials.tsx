@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "./ThemeProvider";
 
 export default function ClientTestimonials() {
-  const { theme } = useTheme();
 
   const testimonials = [
     {
@@ -86,10 +84,11 @@ export default function ClientTestimonials() {
   };
 
   return (
-    <section className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-black' : 'bg-gray-900'
-    }`}>
-      <div className="w-full max-w-6xl mx-auto">
+    <section className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black">
+      {/* Grid Background */}
+      <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
+      
+      <div className="w-full max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
         <div className="mb-12">
@@ -116,11 +115,7 @@ export default function ClientTestimonials() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className={`group relative backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer ${
-                theme === 'dark' 
-                  ? 'bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-gray-700' 
-                  : 'bg-gray-800/50 border-gray-700 hover:bg-gray-700/70 hover:border-gray-600'
-              }`}
+              className="group relative backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-gray-700"
             >
               {/* Testimonial Text */}
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4" 
