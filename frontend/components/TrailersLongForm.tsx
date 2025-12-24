@@ -52,32 +52,32 @@ export default function TrailersLongForm() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-10 px-4 sm:px-6 lg:px-10 bg-black"
+      className="relative min-h-[80vh] lg:min-h-screen w-full flex items-center justify-center py-12 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-10 bg-black"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
 
-      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-20 relative z-10">
+  <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-14 sm:gap-16 lg:gap-20 relative z-10">
         
         {/* Top Section - Trailers and Long form */}
         <div className="">
           {/* Header */}
-          <div className="text-center md:text-left mb-20">
-            <h2 className="trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 tracking-tight text-white">
+          <div className="text-center md:text-left mb-12 sm:mb-14 lg:mb-20">
+            <h2 className="trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white text-balance">
               Trailers and <span className="text-[#9999ff] font-light italic font-eb-garamond">Long form</span>
               
             </h2>
-            <p className="trailers-sub text-sm sm:text-base md:text-lg max-w-3xl font-light leading-relaxed text-gray-300">
+            <p className="trailers-sub text-sm sm:text-base md:text-lg max-w-3xl mx-auto md:mx-0 font-light leading-relaxed text-gray-300 text-balance">
               Podcast trailers, B2B videos and more
             </p>
           </div>
 
           {/* Video Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7 lg:gap-8">
             {videos.map((video) => (
               <div
                 key={video.id}
-                className="trailer-card relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl bg-gray-900"
+                className="trailer-card relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 md:hover:scale-[1.02] md:hover:shadow-2xl bg-gray-900"
                 onMouseEnter={() => setHoveredVideo(video.id)}
                 onMouseLeave={() => setHoveredVideo(null)}
               >
@@ -94,7 +94,7 @@ export default function TrailersLongForm() {
                   <div className="absolute inset-0 bg-black/40"></div>
 
                   {/* Enable sound button */}
-                  <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-black/80 transition-colors z-10">
+                  <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-2 md:hover:bg-black/80 transition-colors z-10">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
                     </svg>
@@ -102,8 +102,8 @@ export default function TrailersLongForm() {
                   </button>
 
                   {/* Caption overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
-                    <p className="text-white text-sm md:text-base leading-tight font-light">
+                  <div className="absolute bottom-3 sm:bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
+                    <p className="text-white text-sm md:text-base leading-tight font-light text-balance">
                       {video.caption}
                     </p>
                   </div>
@@ -200,27 +200,26 @@ export default function TrailersLongForm() {
         </div>
 
         {/* Bottom Section - Launch With Impact */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-9 md:space-y-10">
-              <h2 className="impact-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white">
+          <div className="space-y-6 md:space-y-8">
+            <h2 className="impact-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white text-balance">
               Launch With <span className="text-[#9999ff] font-light italic font-eb-garamond">Impact</span>
-              
             </h2>
             
-            <p className="impact-copy text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed text-gray-300">
+            <p className="impact-copy text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed text-gray-300 text-balance">
               We craft compelling stories that build anticipation, drive traffic and convert your audience with the best in class launch videos.
             </p>
 
-            <div className="pt-2 mt-4">
-              <button className="bg-[#9999ff] hover:bg-brand-500 text-black font-medium px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl text-base md:text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            <div className="pt-4">
+              <button className="w-full sm:w-auto bg-[#9999ff] hover:bg-brand-500 text-black font-medium px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl text-sm md:text-base transition-all duration-300 md:hover:scale-105 md:hover:shadow-xl">
                 Book a Discovery Call
               </button>
             </div>
           </div>
 
           {/* Right Video */}
-          <div className="impact-video relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl bg-gray-900">
+          <div className="impact-video relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 md:hover:scale-[1.02] md:hover:shadow-2xl bg-gray-900">
             <div className="relative aspect-video">
               {/* Video Thumbnail */}
               <img
@@ -233,7 +232,7 @@ export default function TrailersLongForm() {
               <div className="absolute inset-0 bg-black/50"></div>
 
               {/* Enable sound button */}
-              <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-black/80 transition-colors z-10">
+              <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-2 md:hover:bg-black/80 transition-colors z-10">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
                 </svg>
@@ -241,15 +240,15 @@ export default function TrailersLongForm() {
               </button>
 
               {/* Text overlay - center */}
-              <div className="absolute inset-0 flex items-center justify-center px-8 sm:px-10">
-                <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-tight">
+              <div className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 md:px-10">
+                <p className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-tight text-balance">
                   into days of <span className="text-[#9999ff] font-light italic font-eb-garamond">education</span>
                 </p>
               </div>
 
               {/* Caption at bottom */}
-              <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
-                <p className="text-white text-sm md:text-base leading-tight font-light">
+              <div className="absolute bottom-3 sm:bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
+                <p className="text-white text-sm md:text-base leading-tight font-light text-balance">
                   sessions into days of education for
                 </p>
               </div>
