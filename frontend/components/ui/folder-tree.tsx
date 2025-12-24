@@ -28,7 +28,7 @@ const TreeItem: React.FC<{ node: TreeNode; depth: number }> = ({ node, depth }) 
         onClick={() => hasChildren && setIsOpen(!isOpen)}
       >
         {hasChildren && (
-          <span className="text-gray-400 group-hover:text-yellow-400 transition-colors">
+          <span className="text-gray-400 group-hover:text-[#9999ff] transition-colors">
             {isOpen ? (
               <ChevronDown className="w-4 h-4" />
             ) : (
@@ -38,7 +38,7 @@ const TreeItem: React.FC<{ node: TreeNode; depth: number }> = ({ node, depth }) 
         )}
         {!hasChildren && <span className="w-4" />}
         
-        <span className="text-gray-400 group-hover:text-yellow-400 transition-colors">
+        <span className="text-gray-400 group-hover:text-[#9999ff] transition-colors">
           {node.icon ? (
             node.icon
           ) : node.type === "folder" ? (
@@ -52,7 +52,7 @@ const TreeItem: React.FC<{ node: TreeNode; depth: number }> = ({ node, depth }) 
           )}
         </span>
         
-        <span className="text-white font-medium group-hover:text-yellow-400 transition-colors">
+        <span className="text-white font-medium group-hover:text-[#9999ff] transition-colors">
           {node.name}
         </span>
       </div>

@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useTheme } from "./ThemeProvider";
 import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function CuratedContent() {
-  const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   
   const videos = [
@@ -55,14 +53,12 @@ export default function CuratedContent() {
         stagger: 0.12,
         ease: "power3.out",
       }, "-=0.2");
-  }, [theme]);
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-      }`}
+      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-gray-900"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
@@ -70,15 +66,11 @@ export default function CuratedContent() {
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
         <div className="mb-12">
-          <h2 className={`curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>
-            Curated <span className="text-yellow-400 font-normal italic font-eb-garamond">short form</span> content
+          <h2 className="curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 tracking-tight text-white">
+            Curated <span className="text-[#9999ff] font-normal italic font-eb-garamond">short form</span> content
             
           </h2>
-          <p className={`curated-sub text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-          }`}>
+          <p className="curated-sub text-base sm:text-lg md:text-xl max-w-3xl font-light leading-relaxed text-gray-300">
             We help with creative direction and/or ideate, script and post produce.
           </p>
         </div>
@@ -113,7 +105,7 @@ export default function CuratedContent() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
                 <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
                   {video.caption.split(video.highlight)[0]}
-                  <span className="text-yellow-400 italic font-light font-eb-garamond">{video.highlight}</span>
+                  <span className="text-[#9999ff] italic font-light font-eb-garamond">{video.highlight}</span>
                   {video.caption.split(video.highlight)[1]}
                 </p>
               </div>

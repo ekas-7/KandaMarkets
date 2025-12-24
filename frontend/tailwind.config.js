@@ -7,6 +7,14 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#9999ff',
+          400: '#9999ff',
+          500: '#7777ff',
+          300: '#bbbbff',
+        },
+      },
       fontFamily: {
         serif: ['var(--font-family-serif)', 'Georgia', 'serif'],
         sans: ['var(--font-family-sans)', 'system-ui', 'sans-serif'],

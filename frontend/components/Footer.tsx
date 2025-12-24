@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useTheme } from "./ThemeProvider";
 import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function Footer() {
-  const { theme } = useTheme();
   const footerRef = useRef<HTMLElement>(null);
 
   const navigationLinks = [
@@ -72,11 +70,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className={`relative w-full border-t transition-colors duration-300 ${
-      theme === 'dark' 
-        ? 'bg-black border-gray-800' 
-        : 'bg-gray-900 border-gray-700'
-    }`}
+      className="relative w-full border-t bg-black border-gray-800"
     >
       <div className="w-full max-w-6xl mx-auto px-6 py-12">
         
@@ -141,7 +135,7 @@ export default function Footer() {
               href="https://github.com/ekas-7" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-yellow-400 hover:text-yellow-300 underline transition-colors duration-200"
+              className="text-[#9999ff] hover:text-brand-300 underline transition-colors duration-200"
             >
               ekas-7
             </a>

@@ -34,7 +34,7 @@ export default function HighLevelRepurposing() {
       title: "CONTENT\nREPURPOSING",
       image: "/vr-placeholder.jpg",
       gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-      barColor: "from-yellow-400 via-pink-400",
+      barColor: "from-[#9999ff] via-pink-400",
       align: "right",
     },
     {
@@ -257,7 +257,7 @@ export default function HighLevelRepurposing() {
               {/* Optional: Cross Icon on Active Item */}
               {hoveredIndex === index && (
                 <div className={`absolute top-4 ${service.align === 'left' ? 'right-4' : 'left-4'} opacity-30`}>
-                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-yellow-400">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-[#9999ff]">
                     <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>

@@ -48,7 +48,7 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button className="shadow-lg shadow-yellow-200/30" variant="primary" size="lg">
+            <Button className="shadow-lg shadow-[#9999ff]/30" variant="primary" size="lg">
               Join for $9.99/m
             </Button>
             <Button variant="secondary" size="lg">

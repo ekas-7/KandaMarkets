@@ -79,7 +79,7 @@ export default function ClientTestimonials() {
     return (
       <>
         {parts[0]}
-        <span className="text-yellow-400">{highlight}</span>
+        <span className="text-[#9999ff]">{highlight}</span>
         {parts[1]}
       </>
     );
@@ -119,7 +119,7 @@ export default function ClientTestimonials() {
           <div className="space-y-4">
             <div className="flex items-baseline gap-3">
               <h2 className="goal-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
-                The <span className="text-yellow-400 font-light italic font-eb-garamond">Goal</span>
+                The <span className="text-[#9999ff] font-light italic font-eb-garamond">Goal</span>
               </h2>
               {/* Decorative lines */}
               
@@ -156,7 +156,7 @@ export default function ClientTestimonials() {
         <div className="mb-16 lg:mb-20">
           <div className="flex items-baseline gap-3 mb-6">
             <h2 className="testimonial-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
-              Client <span className="text-yellow-400 font-light italic font-eb-garamond">Testimonials</span>
+              Client <span className="text-[#9999ff] font-light italic font-eb-garamond">Testimonials</span>
             </h2>
             {/* Decorative lines */}
            
@@ -172,7 +172,7 @@ export default function ClientTestimonials() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="testimonial-card group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-yellow-400/30"
+              className="testimonial-card group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-[#9999ff]/30"
             >
               {/* Testimonial Text */}
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 font-light"> 

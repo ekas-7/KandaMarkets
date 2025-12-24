@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { useTheme } from "./ThemeProvider";
 import dynamic from "next/dynamic";
 import { useGsapTimeline } from "@/hooks/useGSAP";
 
@@ -16,7 +15,6 @@ const Holoboard3D = dynamic(() => import("./Holoboard3D"), {
 });
 
 export default function ProblemsWeSolve() {
-  const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const rafId = useRef<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -83,9 +81,7 @@ export default function ProblemsWeSolve() {
   return (
     <section 
       ref={sectionRef}
-      className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-black' : 'bg-black'
-      }`}
+      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black"
     >
       {/* Gradient + Grid Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-black/85 to-black pointer-events-none z-0"></div>
@@ -130,11 +126,7 @@ export default function ProblemsWeSolve() {
                       transitionDelay: `${index * 100}ms`,
                     }}
                   >
-                    <div className={`relative overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800/90' 
-                        : 'bg-gradient-to-r from-gray-800/80 to-gray-700/60 border-gray-600/50 hover:border-blue-400/50 hover:bg-gray-700/90'
-                    } px-6 py-4 cursor-pointer`}>
+                    <div className="relative overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800/90 px-6 py-4 cursor-pointer">
                       {/* Animated gradient overlay on hover */}
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                       
