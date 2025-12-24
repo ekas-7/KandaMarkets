@@ -43,12 +43,8 @@ export default function CuratedContent() {
           <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-gray-900'
           }`}>
-            Curated <span className="text-yellow-400 font-normal italic">short form</span> content
-            <span className="inline-block ml-2 align-middle">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
-                <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </span>
+            Curated <span className="text-yellow-400 font-normal italic font-eb-garamond">short form</span> content
+            
           </h2>
           <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
@@ -87,7 +83,7 @@ export default function CuratedContent() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
                 <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
                   {video.caption.split(video.highlight)[0]}
-                  <span className="text-yellow-400 italic font-light">{video.highlight}</span>
+                  <span className="text-yellow-400 italic font-light font-eb-garamond">{video.highlight}</span>
                   {video.caption.split(video.highlight)[1]}
                 </p>
               </div>

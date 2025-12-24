@@ -1,6 +1,6 @@
 import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
-import { Poppins } from 'next/font/google';
+import { Poppins, EB_Garamond } from 'next/font/google';
 
 const themeScript = `(() => {
   try {
@@ -23,9 +23,17 @@ const poppins = Poppins({
   display: 'swap',
 });
 
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-eb-garamond',
+  display: 'swap',
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${ebGaramond.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

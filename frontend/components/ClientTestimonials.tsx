@@ -97,13 +97,10 @@ export default function ClientTestimonials() {
           <div className="space-y-4">
             <div className="flex items-baseline gap-3">
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
-                The <span className="text-yellow-400 font-light italic">Goal</span>
+                The <span className="text-yellow-400 font-light italic font-eb-garamond">Goal</span>
               </h2>
               {/* Decorative lines */}
-              <div className="flex flex-col gap-1.5 mb-4">
-                <div className="w-6 h-0.5 bg-yellow-400 rotate-45"></div>
-                <div className="w-8 h-0.5 bg-yellow-400 rotate-45"></div>
-              </div>
+              
             </div>
             
             <p className="text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
@@ -137,13 +134,10 @@ export default function ClientTestimonials() {
         <div className="mb-16 lg:mb-20">
           <div className="flex items-baseline gap-3 mb-6">
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
-              Client <span className="text-yellow-400 font-light italic">Testimonials</span>
+              Client <span className="text-yellow-400 font-light italic font-eb-garamond">Testimonials</span>
             </h2>
             {/* Decorative lines */}
-            <div className="flex flex-col gap-1.5 mb-4">
-              <div className="w-6 h-0.5 bg-yellow-400 rotate-45"></div>
-              <div className="w-8 h-0.5 bg-yellow-400 rotate-45"></div>
-            </div>
+           
           </div>
           
           <p className="text-lg sm:text-xl text-gray-300 font-light"> 

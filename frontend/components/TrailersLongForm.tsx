@@ -30,26 +30,22 @@ export default function TrailersLongForm() {
   ];
 
   return (
-    <section className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
+    <section className={`relative min-h-screen w-full flex items-center justify-center py-24 px-6 transition-colors duration-300 ${
       theme === 'dark' ? 'bg-black' : 'bg-gray-50'
     }`}>
-      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-20">
+      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32">
         
         {/* Top Section - Trailers and Long form */}
-        <div className="space-y-8">
+        <div className="space-y-12">
           {/* Header */}
           <div>
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-5 transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
-              Trailers and <span className="text-yellow-400 font-light italic">Long form</span>
-              <span className="inline-block ml-2 align-middle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
-                  <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </span>
+              Trailers and <span className="text-yellow-400 font-light italic font-eb-garamond">Long form</span>
+              
             </h2>
-            <p className={`text-base sm:text-lg md:text-xl max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
+            <p className={`text-sm sm:text-base md:text-lg max-w-3xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
             }`}>
               Podcast trailers, B2B videos and more
@@ -57,7 +53,7 @@ export default function TrailersLongForm() {
           </div>
 
           {/* Video Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {videos.map((video) => (
               <div
                 key={video.id}
@@ -186,21 +182,17 @@ export default function TrailersLongForm() {
         </div>
 
         {/* Bottom Section - Launch With Impact */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-6">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium transition-colors duration-300 tracking-tight ${
+          <div className="space-y-8">
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium transition-colors duration-300 tracking-tight ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
-              Launch With <span className="text-yellow-400 font-light italic">Impact</span>
-              <span className="inline-block ml-2 align-middle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-6 h-6 md:w-8 md:h-8">
-                  <path d="M3 3L21 21M21 3L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </span>
+              Launch With <span className="text-yellow-400 font-light italic font-eb-garamond">Impact</span>
+              
             </h2>
             
-            <p className={`text-base sm:text-lg md:text-xl max-w-2xl transition-colors duration-300 font-light leading-relaxed ${
+            <p className={`text-sm sm:text-base md:text-lg max-w-2xl transition-colors duration-300 font-light leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
             }`}>
               We craft compelling stories that build anticipation, drive traffic and convert your audience with the best in class launch videos.
@@ -239,7 +231,7 @@ export default function TrailersLongForm() {
               {/* Text overlay - center */}
               <div className="absolute inset-0 flex items-center justify-center px-6">
                 <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-tight">
-                  into days of <span className="text-yellow-400 font-light italic">education</span>
+                  into days of <span className="text-yellow-400 font-light italic font-eb-garamond">education</span>
                 </p>
               </div>
 
