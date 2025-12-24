@@ -58,7 +58,7 @@ export default function CuratedContent() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-gray-900"
+      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
