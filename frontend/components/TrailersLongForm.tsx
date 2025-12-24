@@ -52,17 +52,17 @@ export default function TrailersLongForm() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-24 px-4 sm:px-6 lg:px-10 bg-black"
+      className="relative min-h-screen w-full flex items-center justify-center py-10 px-4 sm:px-6 lg:px-10 bg-black"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
 
-      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32 relative z-10">
+      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-20 relative z-10">
         
         {/* Top Section - Trailers and Long form */}
-        <div className="space-y-14">
+        <div className="">
           {/* Header */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left mb-20">
             <h2 className="trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 tracking-tight text-white">
               Trailers and <span className="text-[#9999ff] font-light italic font-eb-garamond">Long form</span>
               
