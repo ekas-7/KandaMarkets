@@ -18,46 +18,42 @@ const Holoboard3D = dynamic(() => import("./Holoboard3D"), {
 export default function ProblemsWeSolve() {
   const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
+  const rafId = useRef<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
 
   // Track scroll progress within this section
   useEffect(() => {
-    const handleScroll = () => {
+    const updateProgress = () => {
       if (!sectionRef.current) return;
 
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
-      // Calculate progress: 0 when section enters bottom of viewport, 1 when it leaves top
-      const startProgress = rect.top + rect.height;
-      const endProgress = rect.top - windowHeight;
-      const scrollRange = startProgress - endProgress;
-      const currentScroll = startProgress;
-      
-      const progress = Math.max(
-        0,
-        Math.min(1, 1 - currentScroll / scrollRange)
-      );
 
-      setScrollProgress(progress);
+      // 0 when section is below viewport, 1 when fully past the top
+      const rawProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+      const clamped = Math.max(0, Math.min(1, rawProgress));
 
-      // Reveal items progressively based on scroll progress
+      setScrollProgress(clamped);
+
       const totalItems = 6;
-      const itemsToShow = Math.ceil(progress * totalItems * 1.2);
-      const newVisibleCards = Array.from(
-        { length: Math.min(itemsToShow, totalItems) },
-        (_, i) => i + 1
-      );
-      setVisibleCards(newVisibleCards);
+      const itemsToShow = Math.ceil(clamped * totalItems);
+      setVisibleCards(Array.from({ length: Math.min(itemsToShow, totalItems) }, (_, i) => i + 1));
     };
 
-    handleScroll(); // Initial check
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    const onScroll = () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -88,10 +84,14 @@ export default function ProblemsWeSolve() {
     <section 
       ref={sectionRef}
       className={`relative min-h-screen w-full flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-gray-900'
+        theme === 'dark' ? 'bg-black' : 'bg-black'
       }`}
     >
-      <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center">
+      {/* Gradient + Grid Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-black/85 to-black pointer-events-none z-0"></div>
+    
+
+      <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
         
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">

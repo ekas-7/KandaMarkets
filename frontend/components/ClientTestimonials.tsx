@@ -58,7 +58,7 @@ export default function ClientTestimonials() {
     },
     {
       id: 8,
-      text: "Working with Kanda Speaks has been an absolute pleasure. They produced several videos for Fluid Focus, and we were genuinely impressed by the creativity they brought to each concept. Their modern editing style gave our content a fresh, engaging feel that really captured our brand. Professional, imaginative, and easy to collaborate with - we couldn't be happier",
+      text: "Working with Kanda Speaks has begen an absolute pleasure. They produced several videos for Fluid Focus, and we were genuinely impressed by the creativity they brought to each concept. Their modern editing style gave our content a fresh, engaging feel that really captured our brand. Professional, imaginative, and easy to collaborate with - we couldn't be happier",
       author: "",
       role: "",
       highlight: "",

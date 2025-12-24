@@ -55,7 +55,10 @@ export default function TrailersLongForm() {
         theme === 'dark' ? 'bg-black' : 'bg-gray-50'
       }`}
     >
-      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32">
+      {/* Grid Background */}
+      <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
+
+      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32 relative z-10">
         
         {/* Top Section - Trailers and Long form */}
         <div className="space-y-12">

@@ -64,7 +64,10 @@ export default function CuratedContent() {
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}
     >
-      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center">
+      {/* Grid Background */}
+      <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
+
+      <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
         <div className="mb-12">
           <h2 className={`curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 transition-colors duration-300 tracking-tight ${
