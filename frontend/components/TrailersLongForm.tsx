@@ -4,255 +4,162 @@ import React, { useRef, useState } from "react";
 import { useGsapTimeline } from "@/hooks/useGSAP";
 
 export default function TrailersLongForm() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [, setHoveredVideo] = useState<number | null>(null);
+  const ref = useRef<HTMLElement>(null);
+  const [, setHov] = useState<number | null>(null);
 
-  const videos = [
+  const vids = [
     {
       id: 1,
-      thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
-      caption: "for exactly what you have to",
-      time: "0:01",
+      thumb: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
+      cap: "for exactly what you have to",
     },
     {
       id: 2,
-      thumbnail: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-      caption: "Looking for success",
-      time: "0:01",
-      hasControls: true,
+      thumb: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
+      cap: "Looking for success",
+      ctrl: true,
     },
     {
       id: 3,
-      thumbnail: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop",
-      caption: "the trade-off between health, happiness,",
-      time: "0:01",
+      thumb: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop",
+      cap: "the trade-off between health, happiness,",
     },
   ];
 
-  useGsapTimeline(sectionRef, ({ gsap }) => {
+  useGsapTimeline(ref, ({ gsap }) => {
     const tl = gsap.timeline({
       defaults: { ease: "power3.out" },
       scrollTrigger: {
-        trigger: sectionRef.current,
+        trigger: ref.current,
         start: "top 78%",
       },
     });
 
-    tl.from(".trailers-heading", { y: 50, opacity: 0, duration: 0.8 })
-      .from(".trailers-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.35")
-      .fromTo(".trailer-card", 
+    tl.from(".h-anim", { y: 50, opacity: 0, duration: 0.8 })
+      .from(".s-anim", { y: 30, opacity: 0, duration: 0.7 }, "-=0.35")
+      .fromTo(".c-anim", 
         { y: 40, opacity: 0, rotate: (i: number) => (i % 2 ? 1.5 : -1.5) },
         { y: 0, opacity: 1, rotate: 0, duration: 0.65, stagger: 0.12 }, 
         "-=0.2")
-      .from(".impact-title", { y: 40, opacity: 0, duration: 0.7 }, "-=0.1")
-      .from(".impact-copy", { y: 30, opacity: 0, duration: 0.65, stagger: 0.08 }, "-=0.2")
-      .from(".impact-video", { y: 50, opacity: 0, scale: 0.95, duration: 0.8 }, "-=0.25");
+      .from(".i-title", { y: 40, opacity: 0, duration: 0.7 }, "-=0.1")
+      .from(".i-copy", { y: 30, opacity: 0, duration: 0.65, stagger: 0.08 }, "-=0.2")
+      .from(".i-vid", { y: 50, opacity: 0, scale: 0.95, duration: 0.8 }, "-=0.25");
   }, []);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative min-h-[80vh] lg:min-h-screen w-full flex items-center justify-center py-12 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-10 bg-black"
+      ref={ref}
+      className="relative w-full py-20 px-4 sm:px-6 lg:px-10 bg-black overflow-hidden"
     >
-      {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
 
-  <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-14 sm:gap-16 lg:gap-20 relative z-10">
+      <div className="w-full max-w-6xl mx-auto flex flex-col gap-24 relative z-10">
         
-        {/* Top Section - Trailers and Long form */}
-        <div className="">
-          {/* Header */}
-          <div className="text-center md:text-left mb-12 sm:mb-14 lg:mb-20">
-            <h2 className="trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white text-balance">
+        {/* Top Section */}
+        <div>
+          <div className="text-center md:text-left mb-16">
+            <h2 className="h-anim text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white leading-snug mb-6">
               Trailers and <span className="text-[#9999ff] font-light italic font-eb-garamond">Long form</span>
-              
             </h2>
-            <p className="trailers-sub text-sm sm:text-base md:text-lg max-w-3xl mx-auto md:mx-0 font-light leading-relaxed text-gray-300 text-balance">
+            <p className="s-anim text-base sm:text-lg md:text-xl max-w-3xl mx-auto md:mx-0 font-light text-gray-400">
               Podcast trailers, B2B videos and more
             </p>
           </div>
 
-          {/* Video Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7 lg:gap-8">
-            {videos.map((video) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {vids.map((v) => (
               <div
-                key={video.id}
-                className="trailer-card relative group cursor-pointer overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 md:hover:scale-[1.02] md:hover:shadow-2xl bg-gray-900"
-                onMouseEnter={() => setHoveredVideo(video.id)}
-                onMouseLeave={() => setHoveredVideo(null)}
+                key={v.id}
+                className="c-anim relative group cursor-pointer overflow-hidden rounded-2xl bg-gray-900 border border-white/5 aspect-video"
+                onMouseEnter={() => setHov(v.id)}
+                onMouseLeave={() => setHov(null)}
               >
-                {/* Video Container */}
-                <div className="relative aspect-video">
-                  {/* Video Thumbnail */}
                   <img
-                    src={video.thumbnail}
-                    alt={video.caption}
-                    className="w-full h-full object-cover"
+                    src={v.thumb}
+                    alt={v.cap}
+                    className="w-full h-full object-cover opacity-80"
                   />
                   
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-black/40"></div>
-
-                  {/* Enable sound button */}
-                  <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-2 md:hover:bg-black/80 transition-colors z-10">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-                    </svg>
-                    <span>Enable sound</span>
-                  </button>
-
-                  {/* Caption overlay */}
-                  <div className="absolute bottom-3 sm:bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
-                    <p className="text-white text-sm md:text-base leading-tight font-light text-balance">
-                      {video.caption}
-                    </p>
-                  </div>
-
-                  {/* Video Controls (for middle video) */}
-                  {video.hasControls && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-5 space-y-4">
-                        {/* Progress bar */}
-                        <div className="relative h-1 bg-white/30 rounded-full cursor-pointer">
-                          <div className="absolute top-0 left-0 h-full w-1/3 bg-white rounded-full"></div>
-                          <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg"></div>
+                  {v.ctrl ? (
+                    /* Middle Video Controls */
+                    <div className="absolute inset-0 flex flex-col justify-between z-20">
+                       <div className="p-4">
+                        <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1.5 rounded-full flex items-center gap-2 w-fit">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                            <span>Playing</span>
                         </div>
-                        
-                        {/* Controls */}
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="flex items-center gap-3">
-                            {/* Previous */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Play/Pause */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Next */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M16 18h2V6h-2zM6 18l8.5-6L6 6z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Volume */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Time */}
-                            <span className="text-white text-sm font-medium">0:41</span>
-                          </div>
-                          
-                          <div className="flex items-center gap-3">
-                            {/* Playlist */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Captions */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Settings */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Fullscreen */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                              </svg>
-                            </button>
-                            
-                            {/* Share */}
-                            <button className="text-white hover:text-[#9999ff] transition-colors">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-                              </svg>
-                            </button>
-                          </div>
+                       </div>
+                       <div className="bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 space-y-3">
+                        <div className="h-1 bg-white/20 rounded-full w-full overflow-hidden">
+                          <div className="h-full w-1/3 bg-[#9999ff]"></div>
                         </div>
-                      </div>
+                        <div className="flex justify-between items-center text-white">
+                            <div className="flex gap-4">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                            </div>
+                            <span className="text-xs font-mono text-gray-300">0:41 / 3:20</span>
+                        </div>
+                       </div>
                     </div>
+                  ) : (
+                    /* Standard Overlay */
+                    <>
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <button className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10 z-20">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                            <span>Enable sound</span>
+                        </button>
+                        <div className="absolute bottom-5 left-5 right-5 z-20">
+                            <p className="text-white text-sm font-light leading-snug drop-shadow-md">
+                            {v.cap}
+                            </p>
+                        </div>
+                    </>
                   )}
-                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Bottom Section - Launch With Impact */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-6 md:space-y-8">
-            <h2 className="impact-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white text-balance">
+        {/* Bottom Section - Fixed Alignment */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          
+          {/* Left Text */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+            <h2 className="i-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white leading-tight">
               Launch With <span className="text-[#9999ff] font-light italic font-eb-garamond">Impact</span>
             </h2>
             
-            <p className="impact-copy text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed text-gray-300 text-balance">
+            <p className="i-copy text-base sm:text-lg md:text-xl max-w-xl font-light leading-relaxed text-gray-400">
               We craft compelling stories that build anticipation, drive traffic and convert your audience with the best in class launch videos.
             </p>
 
-            <div className="pt-4">
-              <button className="w-full sm:w-auto bg-[#9999ff] hover:bg-brand-500 text-black font-medium px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl text-sm md:text-base transition-all duration-300 md:hover:scale-105 md:hover:shadow-xl">
+            <div className="i-copy pt-2">
+              <button className="bg-[#9999ff] hover:bg-[#8888ff] text-black font-medium px-8 py-4 rounded-xl text-base transition-transform duration-300 hover:scale-105">
                 Book a Discovery Call
               </button>
             </div>
           </div>
 
           {/* Right Video */}
-          <div className="impact-video relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-300 md:hover:scale-[1.02] md:hover:shadow-2xl bg-gray-900">
-            <div className="relative aspect-video">
-              {/* Video Thumbnail */}
+          <div className="i-vid w-full relative overflow-hidden rounded-2xl bg-gray-900 border border-white/5 shadow-2xl aspect-video">
               <img
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&h=450&fit=crop"
                 alt="Launch video"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover opacity-90"
               />
-              
-              {/* Dark overlay */}
-              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="absolute inset-0 bg-black/40"></div>
 
-              {/* Enable sound button */}
-              <button className="absolute top-3 left-3 md:top-4 md:left-4 bg-black/60 backdrop-blur-sm text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-full flex items-center gap-2 md:hover:bg-black/80 transition-colors z-10">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-                </svg>
-                <span>Enable sound</span>
-              </button>
-
-              {/* Text overlay - center */}
-              <div className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 md:px-10">
-                <p className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-center leading-tight text-balance">
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                 <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight max-w-lg">
                   into days of <span className="text-[#9999ff] font-light italic font-eb-garamond">education</span>
                 </p>
               </div>
 
-              {/* Caption at bottom */}
-              <div className="absolute bottom-3 sm:bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 z-10">
-                <p className="text-white text-sm md:text-base leading-tight font-light text-balance">
-                  sessions into days of education for
-                </p>
-              </div>
-            </div>
+               <div className="absolute bottom-4 right-4 text-white hover:text-[#9999ff] cursor-pointer">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+               </div>
           </div>
         </div>
       </div>
