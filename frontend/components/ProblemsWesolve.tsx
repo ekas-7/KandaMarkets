@@ -9,7 +9,7 @@ const Holoboard3D = dynamic(() => import("./Holoboard3D"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="animate-pulse text-blue-400">Loading 3D Model...</div>
+      <div className="animate-pulse text-[#9999ff]">Loading 3D Model...</div>
     </div>
   ),
 });
@@ -84,7 +84,7 @@ export default function ProblemsWeSolve() {
       className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black"
     >
       {/* Gradient + Grid Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-black/85 to-black pointer-events-none z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#9999ff]/20 via-[#9999ff]/5 to-black pointer-events-none z-0"></div>
     
 
       <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
@@ -126,9 +126,9 @@ export default function ProblemsWeSolve() {
                       transitionDelay: `${index * 100}ms`,
                     }}
                   >
-                    <div className="relative overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800/90 px-6 py-4 cursor-pointer">
+                    <div className="relative overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-[#9999ff]/50 hover:bg-gray-800/90 px-6 py-4 cursor-pointer">
                       {/* Animated gradient overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#9999ff]/0 via-[#9999ff]/10 to-[#9999ff]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                       
                       {/* Index number */}
                       <div className="absolute left-2 top-1/2 -translate-y-1/2 text-5xl font-bold opacity-5 select-none">
@@ -137,13 +137,13 @@ export default function ProblemsWeSolve() {
                       
                       {/* Content */}
                       <div className="relative flex items-center justify-between">
-                        <span className="text-xl md:text-2xl font-medium text-white group-hover:text-blue-300 transition-colors duration-300">
+                        <span className="text-xl md:text-2xl font-medium text-white group-hover:text-[#9999ff] transition-colors duration-300">
                           {member}
                         </span>
                         
                         {/* Arrow icon */}
                         <svg 
-                          className="w-5 h-5 text-gray-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all duration-300" 
+                          className="w-5 h-5 text-gray-500 group-hover:text-[#9999ff] group-hover:translate-x-1 transition-all duration-300" 
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
@@ -153,7 +153,7 @@ export default function ProblemsWeSolve() {
                       </div>
                       
                       {/* Bottom accent line */}
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#9999ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   </div>
                 ))}

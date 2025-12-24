@@ -20,8 +20,8 @@ export default function Navigation({ className }: NavigationProps) {
   }, []);
 
   return (
-    <nav ref={navRef} className={cn("w-full py-6 px-8", className)}>
-  <div className="max-w-7xl mx-auto flex items-center">
+    <nav ref={navRef} className={cn("w-full py-6 px-8 bg-black", className)}>
+  <div className="max-w-7xl mx-auto flex items-center ">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center">

@@ -45,10 +45,14 @@ export default function CuratedContent() {
 
     tl.from(".curated-heading", { y: 50, opacity: 0, duration: 0.8, ease: "power3.out" })
       .from(".curated-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.4")
-      .from(cards, {
+      .fromTo(cards, {
         y: 40,
         opacity: 0,
         rotate: (i: number) => (i % 2 === 0 ? -3 : 3),
+      }, {
+        y: 0,
+        opacity: 1,
+        rotate: 0,
         duration: 0.7,
         stagger: 0.12,
         ease: "power3.out",
@@ -65,7 +69,7 @@ export default function CuratedContent() {
 
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-36">
           <h2 className="curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 tracking-tight text-white">
             Curated <span className="text-[#9999ff] font-normal italic font-eb-garamond">short form</span> content
             

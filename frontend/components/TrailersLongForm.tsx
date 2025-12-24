@@ -40,7 +40,10 @@ export default function TrailersLongForm() {
 
     tl.from(".trailers-heading", { y: 50, opacity: 0, duration: 0.8 })
       .from(".trailers-sub", { y: 30, opacity: 0, duration: 0.7 }, "-=0.35")
-      .from(".trailer-card", { y: 40, opacity: 0, duration: 0.65, stagger: 0.12, rotate: (i: number) => (i % 2 ? 1.5 : -1.5) }, "-=0.2")
+      .fromTo(".trailer-card", 
+        { y: 40, opacity: 0, rotate: (i: number) => (i % 2 ? 1.5 : -1.5) },
+        { y: 0, opacity: 1, rotate: 0, duration: 0.65, stagger: 0.12 }, 
+        "-=0.2")
       .from(".impact-title", { y: 40, opacity: 0, duration: 0.7 }, "-=0.1")
       .from(".impact-copy", { y: 30, opacity: 0, duration: 0.65, stagger: 0.08 }, "-=0.2")
       .from(".impact-video", { y: 50, opacity: 0, scale: 0.95, duration: 0.8 }, "-=0.25");
@@ -57,9 +60,9 @@ export default function TrailersLongForm() {
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center gap-32 relative z-10">
         
         {/* Top Section - Trailers and Long form */}
-        <div className="space-y-12">
+        <div className="space-y-14">
           {/* Header */}
-          <div>
+          <div className="text-center md:text-left">
             <h2 className="trailers-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 tracking-tight text-white">
               Trailers and <span className="text-[#9999ff] font-light italic font-eb-garamond">Long form</span>
               
