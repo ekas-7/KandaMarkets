@@ -11,12 +11,12 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left Side: Text Content */}
         <div className="space-y-6 text-center lg:text-left relative z-10">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white" style={{ fontFamily: 'var(--font-family-serif)' }}>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white font-serif">
             Discover the art of{" "}
             <span className="italic">strategy</span>
           </h1>
           
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0" style={{ fontFamily: 'var(--font-family-sans)' }}>
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 font-sans">
             Join a community of creative strategists and build your portfolio with elegant, data-driven solutions.
           </p>
 
@@ -48,24 +48,6 @@ export default function HeroSection() {
           />
         </div>
       </div>
-
-      {/* Add custom animations to globals.css later */}
-      <style jsx>{`
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        .animate-float-slow {
-          animation: float-slow 4s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float-delayed 5s ease-in-out infinite 1s;
-        }
-      `}</style>
     </section>
   );
 }
