@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button } from "./ui/Button";
-import { Iphone } from "./ui/iphone";
+import { Iphone3D } from "./ui/iphone3d";
 import FloatingBadge from "./FloatingBadge";
 
 export default function HeroSection() {
@@ -33,8 +33,8 @@ export default function HeroSection() {
 
         {/* Right Side: iPhone with Floating Badges */}
         <div className="relative flex items-center justify-center h-[500px] lg:h-[600px]">
-          <div className="w-[280px] sm:w-[320px] lg:w-[360px]">
-            <Iphone videoSrc="https://videos.pexels.com/video-files/8946986/8946986-uhd_1440_2732_25fps.mp4" />
+          <div className="w-full h-full">
+            <Iphone3D videoSrc="https://videos.pexels.com/video-files/8946986/8946986-uhd_1440_2732_25fps.mp4" />
           </div>
           
           {/* Floating Badges */}
