@@ -84,21 +84,69 @@ export default function ClientTestimonials() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black">
+    <section className="relative min-h-screen w-full flex items-center justify-center py-24 lg:py-32 px-6 bg-black">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
       
       <div className="w-full max-w-6xl mx-auto relative z-10">
         
-        {/* Header */}
-        <div className="mb-12">
-          <div className="flex items-baseline gap-2 mb-4">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white" 
+        {/* The Goal Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-32 lg:mb-40">
+          
+          {/* Left Side - Heading */}
+          <div className="space-y-4">
+            <div className="flex items-baseline gap-3">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight" 
+                  style={{ fontFamily: 'var(--font-family-serif)' }}>
+                The <span className="text-yellow-400">Goal</span>
+              </h2>
+              {/* Decorative lines */}
+              <div className="flex flex-col gap-1.5 mb-4">
+                <div className="w-6 h-0.5 bg-yellow-400 rotate-45"></div>
+                <div className="w-8 h-0.5 bg-yellow-400 rotate-45"></div>
+              </div>
+            </div>
+            
+            <p className="text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed" 
+               style={{ fontFamily: 'var(--font-family-sans)' }}>
+              We become your brains and brawn.
+            </p>
+          </div>
+
+          {/* Right Side - Content Points */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-semibold leading-tight" 
+                  style={{ fontFamily: 'var(--font-family-sans)' }}>
+                Max content output with minimal input.
+              </h3>
+            </div>
+
+            <div>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed" 
+                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+                Our clients typically film 3-5 hours a month, we take care of the rest. In other cases, they have footage and need no extra work.
+              </p>
+            </div>
+
+            <div>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed" 
+                 style={{ fontFamily: 'var(--font-family-sans)' }}>
+                Growth focused organic content that brings results. Always.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonials Section Header */}
+        <div className="mb-16 lg:mb-20">
+          <div className="flex items-baseline gap-3 mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight" 
                 style={{ fontFamily: 'var(--font-family-serif)' }}>
               Client <span className="text-yellow-400">Testimonials</span>
             </h2>
             {/* Decorative lines */}
-            <div className="flex flex-col gap-1 mb-2">
+            <div className="flex flex-col gap-1.5 mb-4">
               <div className="w-6 h-0.5 bg-yellow-400 rotate-45"></div>
               <div className="w-8 h-0.5 bg-yellow-400 rotate-45"></div>
             </div>
@@ -111,11 +159,11 @@ export default function ClientTestimonials() {
         </div>
 
         {/* Testimonials Grid - Masonry Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-auto">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="group relative backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-gray-700"
+              className="group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-yellow-400/30"
             >
               {/* Testimonial Text */}
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4" 
@@ -125,7 +173,7 @@ export default function ClientTestimonials() {
 
               {/* Author Info */}
               {testimonial.author && (
-                <div className="border-t border-gray-700 pt-4">
+                <div className="border-t border-gray-700/50 pt-4">
                   <p className="text-white font-semibold text-sm sm:text-base mb-1" 
                      style={{ fontFamily: 'var(--font-family-sans)' }}>
                     {testimonial.author}
