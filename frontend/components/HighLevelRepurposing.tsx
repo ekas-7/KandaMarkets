@@ -72,12 +72,12 @@ export default function HighLevelRepurposing() {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen w-full py-20 px-6 bg-black overflow-hidden"
+      className="relative min-h-screen w-full py-16 md:py-20 px-4 md:px-6 bg-black overflow-hidden"
     >
       <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
-        <div className="mb-16 text-left">
-          <p className="repurpose-kicker text-sm font-light tracking-wider mb-4 text-gray-400 uppercase"> 
+        <div className="mb-12 md:mb-16 text-left">
+          <p className="repurpose-kicker text-xs md:text-sm font-light tracking-wider mb-4 text-gray-400 uppercase"> 
             OUR SERVICES
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function HighLevelRepurposing() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="repurpose-row relative border-b border-gray-800 py-6 cursor-pointer group"
+              className="repurpose-row relative border-b border-gray-800 py-4 md:py-6 cursor-pointer group"
               style={{
                 opacity: isContainerHovered 
                   ? hoveredIndex === index 
@@ -108,14 +108,14 @@ export default function HighLevelRepurposing() {
             >
               {/* Left Aligned Items */}
               {service.align === "left" && (
-                <div className="flex items-center justify-between gap-8">
+                <div className="flex items-center justify-between gap-4 md:gap-8">
                   
                   {/* Left Side: Animated Bar + Image Container + Title */}
-                  <div className="flex items-center gap-6 flex-1 overflow-hidden">
+                  <div className="flex items-center gap-3 md:gap-6 flex-1 overflow-hidden">
                     
                     {/* Animated Vertical Bar */}
                     <div 
-                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
+                      className={`h-16 md:h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
                       style={{
                         width: hoveredIndex === index ? '4px' : '2px',
                         opacity: hoveredIndex === index ? 1 : 0.5,
@@ -124,9 +124,9 @@ export default function HighLevelRepurposing() {
                       }}
                     ></div>
 
-                    {/* Image Container - Expands on Hover */}
+                    {/* Image Container - Expands on Hover - Hidden on mobile */}
                     <div 
-                      className="h-24 rounded-lg overflow-hidden"
+                      className="hidden md:block h-24 rounded-lg overflow-hidden"
                       style={{
                         width: hoveredIndex === index ? '160px' : '0px',
                         opacity: hoveredIndex === index ? 1 : 0,
@@ -152,9 +152,9 @@ export default function HighLevelRepurposing() {
                       </div>
                     </div>
 
-                    {/* Title - Slides Right as Image Expands */}
+                    {/* Title - Responsive text sizes */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line tracking-tight"
+                      className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white leading-none whitespace-pre-line tracking-tight"
                       style={{
                         transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
                         willChange: hoveredIndex === index ? 'transform' : 'auto',
@@ -164,8 +164,9 @@ export default function HighLevelRepurposing() {
                     </h2>
                   </div>
 
-                  {/* Right Side: Discover Button - Fades In on Hover */}
+                  {/* Right Side: Discover Button - Fades In on Hover - Hidden on small mobile */}
                   <div 
+                    className="hidden sm:block"
                     style={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(20px)',
@@ -173,7 +174,7 @@ export default function HighLevelRepurposing() {
                       willChange: hoveredIndex === index ? 'opacity, transform' : 'auto',
                     }}
                   >
-                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
+                    <button className="px-4 md:px-6 py-1.5 md:py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
                       Discover
                     </button>
                   </div>
@@ -182,14 +183,14 @@ export default function HighLevelRepurposing() {
 
               {/* Right Aligned Items */}
               {service.align === "right" && (
-                <div className="flex items-center justify-between gap-8 flex-row-reverse">
+                <div className="flex items-center justify-between gap-4 md:gap-8 flex-row-reverse">
                   
                   {/* Right Side: Animated Bar + Image Container + Title */}
-                  <div className="flex items-center gap-6 flex-1 overflow-hidden flex-row-reverse">
+                  <div className="flex items-center gap-3 md:gap-6 flex-1 overflow-hidden flex-row-reverse">
                     
                     {/* Animated Vertical Bar */}
                     <div 
-                      className={`h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
+                      className={`h-16 md:h-24 bg-gradient-to-b ${service.barColor} to-transparent`}
                       style={{
                         width: hoveredIndex === index ? '4px' : '2px',
                         opacity: hoveredIndex === index ? 1 : 0.5,
@@ -198,9 +199,9 @@ export default function HighLevelRepurposing() {
                       }}
                     ></div>
 
-                    {/* Image Container - Expands on Hover */}
+                    {/* Image Container - Expands on Hover - Hidden on mobile */}
                     <div 
-                      className="h-24 rounded-lg overflow-hidden"
+                      className="hidden md:block h-24 rounded-lg overflow-hidden"
                       style={{
                         width: hoveredIndex === index ? '160px' : '0px',
                         opacity: hoveredIndex === index ? 1 : 0,
@@ -226,9 +227,9 @@ export default function HighLevelRepurposing() {
                       </div>
                     </div>
 
-                    {/* Title - Slides Left as Image Expands */}
+                    {/* Title - Responsive text sizes */}
                     <h2 
-                      className="text-5xl sm:text-6xl md:text-7xl font-medium text-white leading-none whitespace-pre-line text-right tracking-tight"
+                      className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white leading-none whitespace-pre-line text-right tracking-tight"
                       style={{
                         transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
                         willChange: hoveredIndex === index ? 'transform' : 'auto',
@@ -238,8 +239,9 @@ export default function HighLevelRepurposing() {
                     </h2>
                   </div>
 
-                  {/* Left Side: Discover Button - Fades In on Hover */}
+                  {/* Left Side: Discover Button - Fades In on Hover - Hidden on small mobile */}
                   <div 
+                    className="hidden sm:block"
                     style={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(-20px)',
@@ -247,7 +249,7 @@ export default function HighLevelRepurposing() {
                       willChange: hoveredIndex === index ? 'opacity, transform' : 'auto',
                     }}
                   >
-                    <button className="px-6 py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
+                    <button className="px-4 md:px-6 py-1.5 md:py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
                       Discover
                     </button>
                   </div>
@@ -267,8 +269,8 @@ export default function HighLevelRepurposing() {
         </div>
 
         {/* Bottom Subtitle */}
-        <div className="mt-16 text-center">
-          <p className="repurpose-footer text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
+        <div className="mt-12 md:mt-16 text-center">
+          <p className="repurpose-footer text-xs sm:text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
              style={{ fontFamily: 'var(--font-family-sans)' }}>
             Hover to explore our innovative solutions across multiple platforms
           </p>

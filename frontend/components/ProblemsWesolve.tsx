@@ -81,7 +81,7 @@ export default function ProblemsWeSolve() {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black"
+      className="relative min-h-screen w-full flex items-center justify-center py-16 md:py-20 px-4 md:px-6 bg-black"
     >
       {/* Gradient + Grid Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#9999ff]/20 via-[#9999ff]/5 to-black pointer-events-none z-0"></div>
@@ -90,10 +90,10 @@ export default function ProblemsWeSolve() {
       <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center relative z-10">
         
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center min-h-[500px] md:min-h-[600px]">
           
           {/* Left Side - 3D Model */}
-          <div className="holoboard-shell relative h-[600px] order-1 lg:order-1">
+          <div className="holoboard-shell relative h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-1">
             <div className="absolute inset-0 flex items-center justify-center">
               <div 
                 className="w-full h-full transition-opacity duration-1000"
@@ -109,11 +109,11 @@ export default function ProblemsWeSolve() {
           {/* Right Side - List */}
           <div className="relative flex items-center justify-center order-2 lg:order-2">
             <div className="w-full max-w-lg">
-              <p className="problems-tagline text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light"> 
+              <p className="problems-tagline text-base md:text-lg lg:text-xl text-gray-400 mb-8 md:mb-10 leading-relaxed font-light"> 
                 Think of an in house content team, that you don't have to manage.
               </p>
               
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-3">
                 {teamMembers.map((member, index) => (
                   <div
                     key={index}
@@ -126,24 +126,24 @@ export default function ProblemsWeSolve() {
                       transitionDelay: `${index * 100}ms`,
                     }}
                   >
-                    <div className="relative overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-[#9999ff]/50 hover:bg-gray-800/90 px-6 py-4 cursor-pointer">
+                    <div className="relative overflow-hidden rounded-lg md:rounded-xl border backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-gray-900/80 to-gray-800/60 border-gray-700/50 hover:border-[#9999ff]/50 hover:bg-gray-800/90 px-4 md:px-6 py-3 md:py-4 cursor-pointer">
                       {/* Animated gradient overlay on hover */}
                       <div className="absolute inset-0 bg-gradient-to-r from-[#9999ff]/0 via-[#9999ff]/10 to-[#9999ff]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                       
                       {/* Index number */}
-                      <div className="absolute left-2 top-1/2 -translate-y-1/2 text-5xl font-bold opacity-5 select-none">
+                      <div className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 text-3xl md:text-4xl lg:text-5xl font-bold opacity-5 select-none">
                         {(index + 1).toString().padStart(2, '0')}
                       </div>
                       
                       {/* Content */}
                       <div className="relative flex items-center justify-between">
-                        <span className="text-xl md:text-2xl font-medium text-white group-hover:text-[#9999ff] transition-colors duration-300">
+                        <span className="text-lg sm:text-xl md:text-2xl font-medium text-white group-hover:text-[#9999ff] transition-colors duration-300">
                           {member}
                         </span>
                         
                         {/* Arrow icon */}
                         <svg 
-                          className="w-5 h-5 text-gray-500 group-hover:text-[#9999ff] group-hover:translate-x-1 transition-all duration-300" 
+                          className="w-4 h-4 md:w-5 md:h-5 text-gray-500 group-hover:text-[#9999ff] group-hover:translate-x-1 transition-all duration-300" 
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"

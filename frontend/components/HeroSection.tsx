@@ -32,39 +32,38 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center pt-0  pb-60 px-6 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-0 pb-32 md:pb-60 px-4 md:px-6 overflow-hidden bg-black"
       style={{
         background: 'linear-gradient(to top, rgba(153, 153, 255, 0.125), transparent), black'
       }}
     >
       <div className="max-w-[1280px] mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
           {/* Left Side: Text Content */}
           <div className="text-center lg:text-left relative z-10">
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-gray-900 dark:text-white tracking-tight mb-6">
+            <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-gray-900 dark:text-white tracking-tight mb-4 md:mb-6">
               Discover the art of{" "}
-              <span className=" font-light italic">strategy</span>
+              <span className="font-light italic">strategy</span>
             </h1>
             
-            <p className="hero-copy text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed mb-8">
+            <p className="hero-copy text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed mb-6 md:mb-8">
               Join a community of creative strategists and build your portfolio with elegant, data-driven solutions.
             </p>
 
             {/* CTA Buttons */}
-            <div className="hero-cta flex flex-col sm:flex-row gap-4 mt-16 justify-center lg:justify-start">
+            <div className="hero-cta flex flex-col sm:flex-row gap-4 mt-8 md:mt-16 justify-center lg:justify-start">
               <Button 
                 variant={null as any}
-                className="bg-[#9999ff] text-white  hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
+                className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm md:text-base px-6 md:px-8 py-3 md:py-4" 
                 size="lg"
               >
                 Join for $9.99/m
               </Button>
-  
+            </div>
           </div>
-        </div>
 
           {/* Right Side: iPhone with Floating Badges */}
-          <div className="hero-device relative flex items-center justify-center h-[500px] lg:h-[600px]">
+          <div className="hero-device relative flex items-center justify-center h-[400px] sm:h-[500px] lg:h-[600px]">
             <div className="w-full h-full">
               <Iphone3D videoSrc="https://videos.pexels.com/video-files/8946986/8946986-uhd_1440_2732_25fps.mp4" />
             </div>
@@ -72,11 +71,11 @@ export default function HeroSection() {
             {/* Floating Badges */}
             <FloatingBadge 
               text="@coplin" 
-              className="hero-badge top-8 right-4 lg:right-12 animate-float-slow"
+              className="hero-badge top-4 md:top-8 right-2 md:right-4 lg:right-12 animate-float-slow text-xs md:text-sm"
             />
             <FloatingBadge 
               text="@andrea" 
-              className="hero-badge bottom-16 left-4 lg:left-8 animate-float-delayed"
+              className="hero-badge bottom-12 md:bottom-16 left-2 md:left-4 lg:left-8 animate-float-delayed text-xs md:text-sm"
             />
           </div>
         </div>

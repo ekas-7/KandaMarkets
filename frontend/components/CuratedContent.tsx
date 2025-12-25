@@ -62,19 +62,19 @@ export default function CuratedContent() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-20 px-6 bg-black"
+      className="relative min-h-screen w-full flex items-center justify-center py-16 md:py-20 px-4 md:px-6 bg-black"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
 
       <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-center relative z-10">
         {/* Header */}
-        <div className="mb-36">
+        <div className="mb-20 md:mb-36">
           <h2 className="curated-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mb-3 md:mb-4 tracking-tight text-white">
             Curated <span className="text-[#9999ff] font-normal italic font-eb-garamond">short form</span> content
             
           </h2>
-          <p className="curated-sub text-base sm:text-lg md:text-xl max-w-3xl font-light leading-relaxed text-gray-300">
+          <p className="curated-sub text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl font-light leading-relaxed text-gray-300">
             We help with creative direction and/or ideate, script and post produce.
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function CuratedContent() {
 
               {/* Text overlay - middle */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
-                <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-tight">
+                <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-medium leading-tight">
                   {video.caption.split(video.highlight)[0]}
                   <span className="text-[#9999ff] italic font-light font-eb-garamond">{video.highlight}</span>
                   {video.caption.split(video.highlight)[1]}

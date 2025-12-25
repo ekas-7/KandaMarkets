@@ -72,34 +72,34 @@ export default function Footer() {
       ref={footerRef}
       className="relative w-full border-t bg-black border-gray-800"
     >
-      <div className="w-full max-w-6xl mx-auto px-6 py-12">
+      <div className="w-full max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-12">
         
         {/* Top Section - Logo and Navigation */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 pb-12 border-b border-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 mb-10 md:mb-12 pb-10 md:pb-12 border-b border-gray-800">
           
           {/* Logo and Brand */}
-          <div className="footer-brand flex items-center gap-3">
+          <div className="footer-brand flex items-center gap-2 md:gap-3">
             {/* Logo Icon */}
-            <div className="w-10 h-10 flex items-center justify-center">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 40 40" fill="none" className="md:w-10 md:h-10">
                 <path d="M8 8L16 4L24 8L32 4L32 16L24 20L16 16L8 20V8Z" fill="white"/>
                 <path d="M8 20L16 16L24 20L32 16V28L24 32L16 28L8 32V20Z" fill="white" opacity="0.7"/>
               </svg>
             </div>
             
             {/* Brand Name */}
-            <span className="text-white text-xl md:text-2xl font-medium"> 
+            <span className="text-white text-lg md:text-xl lg:text-2xl font-medium"> 
               Kanda Speaks
             </span>
           </div>
 
           {/* Navigation Links */}
-          <nav className="footer-links flex flex-wrap gap-6 md:gap-8">
+          <nav className="footer-links flex flex-wrap gap-4 md:gap-6 lg:gap-8">
             {navigationLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm md:text-base font-light"
+                className="text-gray-300 hover:text-white transition-colors duration-200 text-xs sm:text-sm md:text-base font-light"
               >
                 {link.name}
               </a>
@@ -107,7 +107,7 @@ export default function Footer() {
           </nav>
 
           {/* Social Links */}
-          <div className="footer-social flex items-center gap-4">
+          <div className="footer-social flex items-center gap-3 md:gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -117,15 +117,17 @@ export default function Footer() {
                 className="text-gray-400 hover:text-white transition-colors duration-200"
                 aria-label={social.name}
               >
-                {social.icon}
+                <div className="w-5 h-5 md:w-6 md:h-6">
+                  {social.icon}
+                </div>
               </a>
             ))}
           </div>
         </div>
 
         {/* Bottom Section - Copyright */}
-  <div className="footer-bottom flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p className="text-gray-400 font-light">
+        <div className="footer-bottom flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-xs sm:text-sm">
+          <p className="text-gray-400 font-light text-center md:text-left">
             © 2025 Kanda Speaks. All rights reserved.
           </p>
           

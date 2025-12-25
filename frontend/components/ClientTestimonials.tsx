@@ -105,7 +105,7 @@ export default function ClientTestimonials() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center py-24 lg:py-32 px-6 bg-black"
+      className="relative min-h-screen w-full flex items-center justify-center py-16 md:py-24 lg:py-32 px-4 md:px-6 bg-black"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-50 pointer-events-none z-0"></div>
@@ -113,39 +113,39 @@ export default function ClientTestimonials() {
       <div className="w-full max-w-6xl mx-auto relative z-10">
         
         {/* The Goal Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-32 lg:mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center mb-24 md:mb-32 lg:mb-40">
           
           {/* Left Side - Heading */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             <div className="flex items-baseline gap-3">
-              <h2 className="goal-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+              <h2 className="goal-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white leading-tight tracking-tight"> 
                 The <span className="text-[#9999ff] font-light italic font-eb-garamond">Goal</span>
               </h2>
               {/* Decorative lines */}
               
             </div>
             
-            <p className="goal-sub text-lg sm:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
+            <p className="goal-sub text-base sm:text-lg md:text-xl text-gray-300 max-w-md leading-relaxed font-light"> 
               We become your brains and brawn.
             </p>
           </div>
 
           {/* Right Side - Content Points */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div className="goal-point">
-              <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-medium leading-tight"> 
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-medium leading-tight"> 
                 Max content output with minimal input.
               </h3>
             </div>
 
             <div className="goal-point">
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed font-light"> 
                 Our clients typically film 3-5 hours a month, we take care of the rest. In other cases, they have footage and need no extra work.
               </p>
             </div>
 
             <div className="goal-point">
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed font-light"> 
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed font-light"> 
                 Growth focused organic content that brings results. Always.
               </p>
             </div>
@@ -153,39 +153,39 @@ export default function ClientTestimonials() {
         </div>
 
         {/* Testimonials Section Header */}
-        <div className="mb-16 lg:mb-20">
-          <div className="flex items-baseline gap-3 mb-6">
-            <h2 className="testimonial-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight tracking-tight"> 
+        <div className="mb-12 md:mb-16 lg:mb-20">
+          <div className="flex items-baseline gap-3 mb-4 md:mb-6">
+            <h2 className="testimonial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white leading-tight tracking-tight"> 
               Client <span className="text-[#9999ff] font-light italic font-eb-garamond">Testimonials</span>
             </h2>
             {/* Decorative lines */}
            
           </div>
           
-          <p className="testimonial-sub text-lg sm:text-xl text-gray-300 font-light"> 
+          <p className="testimonial-sub text-base sm:text-lg md:text-xl text-gray-300 font-light"> 
             Hear from their experience
           </p>
         </div>
 
         {/* Testimonials Grid - Masonry Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 auto-rows-auto">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="testimonial-card group relative backdrop-blur-sm border rounded-3xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-[#9999ff]/30"
+              className="testimonial-card group relative backdrop-blur-sm border rounded-2xl md:rounded-3xl p-4 md:p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer bg-gray-900/50 border-gray-800 hover:bg-gray-800/70 hover:border-[#9999ff]/30"
             >
               {/* Testimonial Text */}
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 font-light"> 
+              <p className="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed mb-3 md:mb-4 font-light"> 
                 {highlightText(testimonial.text, testimonial.highlight)}
               </p>
 
               {/* Author Info */}
               {testimonial.author && (
-                <div className="border-t border-gray-700/50 pt-4">
-                  <p className="text-white font-medium text-sm sm:text-base mb-1"> 
+                <div className="border-t border-gray-700/50 pt-3 md:pt-4">
+                  <p className="text-white font-medium text-xs sm:text-sm md:text-base mb-1"> 
                     {testimonial.author}
                   </p>
-                  <p className="text-gray-400 text-xs sm:text-sm font-light"> 
+                  <p className="text-gray-400 text-[10px] sm:text-xs md:text-sm font-light"> 
                     {testimonial.role}
                   </p>
                 </div>
