@@ -28,7 +28,7 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       console.log('=== iPhone Model Meshes ===');
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          // console.log('Mesh name:', child.name, 'Material:', child.material?.name);
+          console.log('Mesh name:', child.name, 'Material:', child.material?.name);
         }
       });
     }
@@ -70,6 +70,10 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       texture.format = THREE.RGBAFormat;
       texture.colorSpace = THREE.SRGBColorSpace;
       
+      // Rotate the video texture by 180 degrees
+      texture.center.set(0.5, 0.5);
+      texture.rotation = Math.PI; // 180 degrees in radians
+      
       videoRef.current = video;
       setVideoTexture(texture);
 
@@ -85,11 +89,11 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
     if (videoTexture && scene) {
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          // console.log('Checking mesh:', child.name);
+          console.log('Checking mesh:', child.name);
           
           // Look for the screen mesh - trying multiple possible names
           if (child.name === 'Object_18' || child.name === 'Object_94') {
-            // console.log('Found Screen mesh:', child.name);
+            console.log('Found Screen mesh:', child.name);
             
             // Apply video texture directly to the Screen mesh
             child.material = new THREE.MeshBasicMaterial({ 
