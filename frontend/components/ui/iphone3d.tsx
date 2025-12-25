@@ -28,7 +28,7 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       console.log('=== iPhone Model Meshes ===');
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          console.log('Mesh name:', child.name, 'Material:', child.material?.name);
+          // console.log('Mesh name:', child.name, 'Material:', child.material?.name);
         }
       });
     }
@@ -85,23 +85,17 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
     if (videoTexture && scene) {
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          // Look for the screen mesh - try multiple possible names
-          const childName = child.name.toLowerCase();
-          if (childName.includes('screen') || 
-              childName.includes('display') || 
-              childName.includes('glass') ||
-              child.material?.name?.toLowerCase().includes('screen')) {
+          // console.log('Checking mesh:', child.name);
+          
+          // Look for the screen mesh - trying multiple possible names
+          if (child.name === 'Object_18' || child.name === 'Object_94') {
+            // console.log('Found Screen mesh:', child.name);
             
-            console.log('Found screen mesh:', child.name);
-            
-            // Create material with video texture
-            const videoMaterial = new THREE.MeshBasicMaterial({
+            // Apply video texture directly to the Screen mesh
+            child.material = new THREE.MeshBasicMaterial({ 
               map: videoTexture,
-              side: THREE.DoubleSide,
               toneMapped: false,
             });
-            
-            child.material = videoMaterial;
           }
         }
       });
