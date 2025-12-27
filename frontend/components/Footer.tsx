@@ -2,6 +2,8 @@
 
 import React, { useRef } from "react";
 import { useGsapTimeline } from "@/hooks/useGSAP";
+import Link from "next/link";
+import { Button } from "./ui/Button";
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -61,7 +63,8 @@ export default function Footer() {
       },
     });
 
-    tl.from(".footer-brand", { opacity: 0, y: 20, duration: 0.6 })
+    tl.from(".footer-cta", { opacity: 0, y: 30, duration: 0.7 })
+      .from(".footer-brand", { opacity: 0, y: 20, duration: 0.6 }, "-=0.3")
       .from(".footer-links a", { opacity: 0, y: 18, stagger: 0.08, duration: 0.55 }, "-=0.25")
       .from(".footer-social a", { opacity: 0, y: 14, stagger: 0.06, duration: 0.5 }, "-=0.25")
       .from(".footer-bottom", { opacity: 0, y: 16, duration: 0.6 }, "-=0.2");
@@ -74,6 +77,25 @@ export default function Footer() {
     >
       <div className="w-full max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-12">
         
+        {/* CTA Section */}
+        <div className="footer-cta text-center mb-12 md:mb-16 pb-12 md:pb-16 border-b border-gray-800">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white mb-4">
+            Ready to grow your <span className="font-light italic text-[#9999ff]">brand?</span>
+          </h2>
+          <p className="text-gray-400 font-light mb-6 md:mb-8 max-w-xl mx-auto text-sm sm:text-base">
+            Book a free strategy call and let's discuss how we can help you achieve your goals.
+          </p>
+          <Link href="/interestform">
+            <Button 
+              variant={null as any}
+              className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4" 
+              size="lg"
+            >
+              Get Free Strategy Call
+            </Button>
+          </Link>
+        </div>
+
         {/* Top Section - Logo and Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 mb-10 md:mb-12 pb-10 md:pb-12 border-b border-gray-800">
           
