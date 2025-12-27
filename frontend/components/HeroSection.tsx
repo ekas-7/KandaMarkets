@@ -5,6 +5,7 @@ import { Button } from "./ui/Button";
 import { Iphone3D } from "./ui/iphone3d";
 import FloatingBadge from "./FloatingBadge";
 import { useGsapTimeline } from "@/hooks/useGSAP";
+import Link from "next/link";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -57,8 +58,18 @@ export default function HeroSection() {
                 className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 w-full sm:w-auto" 
                 size="lg"
               >
-                Join for $9.99/m
+                Contact on Cal.com
               </Button>
+              
+              <Link href="/interestform">
+                <Button 
+                  variant={null as any}
+                  className="bg-transparent border-2 border-[#9999ff] text-[#9999ff] hover:bg-[#9999ff]/10 hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 w-full sm:w-auto" 
+                  size="lg"
+                >
+                  Get Free Strategy Call
+                </Button>
+              </Link>
             </div>
           </div>
 

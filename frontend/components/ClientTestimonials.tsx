@@ -2,6 +2,8 @@
 
 import React, { useRef } from "react";
 import { useGsapTimeline } from "@/hooks/useGSAP";
+import Link from "next/link";
+import { Button } from "./ui/Button";
 
 export default function ClientTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -99,7 +101,8 @@ export default function ClientTestimonials() {
       .from(".goal-point", { y: 25, opacity: 0, duration: 0.6, stagger: 0.12 }, "-=0.25")
       .from(".testimonial-heading", { y: 40, opacity: 0, duration: 0.75 }, "-=0.2")
       .from(".testimonial-sub", { y: 24, opacity: 0, duration: 0.6 }, "-=0.25")
-      .from(".testimonial-card", { y: 40, opacity: 0, duration: 0.7, stagger: 0.08 }, "-=0.2");
+      .from(".testimonial-card", { y: 40, opacity: 0, duration: 0.7, stagger: 0.08 }, "-=0.2")
+      .from(".testimonial-cta", { y: 30, opacity: 0, duration: 0.7 }, "-=0.4");
   }, []);
 
   return (
@@ -193,6 +196,8 @@ export default function ClientTestimonials() {
             </div>
           ))}
         </div>
+
+      
       </div>
     </section>
   );

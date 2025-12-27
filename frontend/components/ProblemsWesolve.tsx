@@ -3,6 +3,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useGsapTimeline } from "@/hooks/useGSAP";
+import Link from "next/link";
+import { Button } from "./ui/Button";
 
 // Dynamically import the 3D component to avoid SSR issues
 const Holoboard3D = dynamic(() => import("./Holoboard3D"), {
@@ -66,7 +68,8 @@ export default function ProblemsWeSolve() {
 
     tl.from(".holoboard-shell", { opacity: 0, y: 50, duration: 0.9 })
       .from(".problems-tagline", { opacity: 0, y: 30, duration: 0.7 }, "-=0.45")
-      .from(".problems-card", { opacity: 0, y: 35, duration: 0.65, stagger: 0.12 }, "-=0.3");
+      .from(".problems-card", { opacity: 0, y: 35, duration: 0.65, stagger: 0.12 }, "-=0.3")
+      .from(".problems-cta", { y: 30, opacity: 0, duration: 0.7 }, "-=0.4");
   }, []);
 
   const teamMembers = [
@@ -160,6 +163,25 @@ export default function ProblemsWeSolve() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="problems-cta text-center mt-16 md:mt-20 lg:mt-24">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white mb-4">
+            Ready to solve your <span className="font-light italic text-[#9999ff]">content challenges?</span>
+          </h3>
+          <p className="text-gray-400 font-light mb-6 md:mb-8 max-w-2xl mx-auto text-sm sm:text-base">
+            Let our team of experts handle your content creation while you focus on growing your business.
+          </p>
+          <Link href="/interestform">
+            <Button 
+              variant={null as any}
+              className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4" 
+              size="lg"
+            >
+              Get Free Strategy Call
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
