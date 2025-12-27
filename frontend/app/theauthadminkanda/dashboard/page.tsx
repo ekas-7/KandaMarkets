@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [updatingStatus, setUpdatingStatus] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -62,6 +63,33 @@ export default function AdminDashboard() {
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/theauthadminkanda" });
+  };
+
+  const updateLeadStatus = async (leadId: string, newStatus: string) => {
+    setUpdatingStatus(leadId);
+    try {
+      const response = await fetch(`/api/admin/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update status');
+      }
+
+      // Update the local state
+      setLeads(leads.map(lead => 
+        lead._id === leadId ? { ...lead, status: newStatus } : lead
+      ));
+    } catch (err) {
+      console.error('Error updating status:', err);
+      alert('Failed to update status. Please try again.');
+    } finally {
+      setUpdatingStatus(null);
+    }
   };
 
   const filteredLeads = leads.filter((lead) => {
@@ -188,6 +216,7 @@ export default function AdminDashboard() {
                 <option value="new">New</option>
                 <option value="contacted">Contacted</option>
                 <option value="qualified">Qualified</option>
+                <option value="converted">Converted</option>
               </select>
             </div>
           </div>
@@ -272,93 +301,247 @@ export default function AdminDashboard() {
                         {/* Modal */}
                         <dialog
                           id={`modal-${lead._id}`}
-                          className="rounded-2xl bg-gray-900 border border-[#9999ff]/20 p-0 backdrop:bg-black/80"
+                          className="rounded-3xl bg-gray-900 border-2 border-[#9999ff]/30 p-0 backdrop:bg-black/90 shadow-[0_0_50px_rgba(153,153,255,0.3)] max-w-4xl w-full fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                         >
-                          <div className="p-6 max-w-2xl">
-                            <div className="flex justify-between items-start mb-6">
-                              <h3 className="text-2xl font-normal text-white">
-                                Lead <span className="text-[#9999ff] font-light italic">Details</span>
-                              </h3>
-                              <button
-                                onClick={() => {
-                                  const modal = document.getElementById(`modal-${lead._id}`);
-                                  if (modal) (modal as HTMLDialogElement).close();
-                                }}
-                                className="text-gray-400 hover:text-white transition-colors"
-                              >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                              </button>
-                            </div>
-
-                            <div className="space-y-4 text-sm">
-                              <div>
-                                <p className="text-gray-400 font-light mb-1">Full Name</p>
-                                <p className="text-white">{lead.fullName}</p>
-                              </div>
-                              <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Email</p>
-                                  <p className="text-white">{lead.email}</p>
-                                </div>
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Phone</p>
-                                  <p className="text-white">{lead.phone}</p>
-                                </div>
-                              </div>
-                              <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Business Name</p>
-                                  <p className="text-white">{lead.businessName}</p>
-                                </div>
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Instagram</p>
-                                  <p className="text-[#9999ff]">{lead.instagramHandle}</p>
-                                </div>
-                              </div>
-                              <div>
-                                <p className="text-gray-400 font-light mb-1">Services Interested In</p>
-                                <div className="flex flex-wrap gap-2">
-                                  {lead.services.map((service, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="px-3 py-1 bg-[#9999ff]/20 border border-[#9999ff]/30 rounded-full text-xs text-[#9999ff]"
-                                    >
-                                      {service}
+                          <div className="relative">
+                            {/* Header */}
+                            <div className="bg-black/50 px-8 py-6 border-b border-[#9999ff]/20">
+                              <div className="flex justify-between items-start">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-4 mb-2">
+                                    <h3 className="text-3xl font-normal text-white">
+                                      Lead <span className="text-[#9999ff] font-light italic">Details</span>
+                                    </h3>
+                                    {/* Status Badge */}
+                                    <span className={`px-4 py-1 rounded-full text-sm font-light capitalize ${
+                                      lead.status === 'new' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
+                                      lead.status === 'contacted' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
+                                      lead.status === 'qualified' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
+                                      'bg-green-500/20 text-green-400 border border-green-500/30'
+                                    }`}>
+                                      {lead.status}
                                     </span>
-                                  ))}
+                                  </div>
+                                  <p className="text-sm text-gray-400">
+                                    Submitted on {new Date(lead.submittedAt).toLocaleDateString('en-US', { 
+                                      weekday: 'long', 
+                                      year: 'numeric', 
+                                      month: 'long', 
+                                      day: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit'
+                                    })}
+                                  </p>
                                 </div>
-                              </div>
-                              <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Business Type</p>
-                                  <p className="text-white capitalize">{lead.businessType}</p>
-                                </div>
-                                <div>
-                                  <p className="text-gray-400 font-light mb-1">Budget</p>
-                                  <p className="text-white">{lead.budget}</p>
-                                </div>
-                              </div>
-                              <div>
-                                <p className="text-gray-400 font-light mb-1">Biggest Goal</p>
-                                <p className="text-white">{lead.biggestGoal}</p>
-                              </div>
-                              <div>
-                                <p className="text-gray-400 font-light mb-1">Submitted At</p>
-                                <p className="text-white">
-                                  {new Date(lead.submittedAt).toLocaleString()}
-                                </p>
+                                <button
+                                  onClick={() => {
+                                    const modal = document.getElementById(`modal-${lead._id}`);
+                                    if (modal) (modal as HTMLDialogElement).close();
+                                  }}
+                                  className="text-gray-400 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all"
+                                >
+                                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                </button>
                               </div>
                             </div>
 
-                            <div className="mt-6 flex justify-end">
+                            {/* Content */}
+                            <div className="p-8 max-h-[70vh] overflow-y-auto">
+                              {/* Status Update Section */}
+                              <div className="mb-8">
+                                <h4 className="text-lg font-normal text-[#9999ff] mb-4 flex items-center">
+                                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                  Update Lead Status
+                                </h4>
+                                <div className="bg-black/40 p-6 rounded-xl border border-[#9999ff]/10">
+                                  <p className="text-sm text-gray-400 mb-4">Change the status of this lead to track your progress</p>
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    {['new', 'contacted', 'qualified', 'converted'].map((statusOption) => (
+                                      <button
+                                        key={statusOption}
+                                        onClick={() => updateLeadStatus(lead._id, statusOption)}
+                                        disabled={lead.status === statusOption || updatingStatus === lead._id}
+                                        className={`px-4 py-3 rounded-xl font-light capitalize transition-all border-2 ${
+                                          lead.status === statusOption
+                                            ? statusOption === 'new' 
+                                              ? 'bg-blue-500/30 border-blue-500/60 text-blue-300 cursor-not-allowed'
+                                              : statusOption === 'contacted'
+                                              ? 'bg-yellow-500/30 border-yellow-500/60 text-yellow-300 cursor-not-allowed'
+                                              : statusOption === 'qualified'
+                                              ? 'bg-purple-500/30 border-purple-500/60 text-purple-300 cursor-not-allowed'
+                                              : 'bg-green-500/30 border-green-500/60 text-green-300 cursor-not-allowed'
+                                            : statusOption === 'new'
+                                            ? 'bg-blue-500/10 border-blue-500/30 text-blue-400 hover:bg-blue-500/20 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]'
+                                            : statusOption === 'contacted'
+                                            ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/20 hover:shadow-[0_0_15px_rgba(234,179,8,0.4)]'
+                                            : statusOption === 'qualified'
+                                            ? 'bg-purple-500/10 border-purple-500/30 text-purple-400 hover:bg-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]'
+                                            : 'bg-green-500/10 border-green-500/30 text-green-400 hover:bg-green-500/20 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]'
+                                        }`}
+                                      >
+                                        {updatingStatus === lead._id ? (
+                                          <span className="flex items-center justify-center">
+                                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                          </span>
+                                        ) : (
+                                          <>
+                                            {statusOption}
+                                            {lead.status === statusOption && (
+                                              <svg className="w-4 h-4 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                              </svg>
+                                            )}
+                                          </>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Personal Information Section */}
+                              <div className="mb-8">
+                                <h4 className="text-lg font-normal text-[#9999ff] mb-4 flex items-center">
+                                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                  </svg>
+                                  Personal Information
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black/40 p-6 rounded-xl border border-[#9999ff]/10">
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Full Name</p>
+                                    <p className="text-white text-lg font-light">{lead.fullName}</p>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Email Address</p>
+                                    <a href={`mailto:${lead.email}`} className="text-[#9999ff] text-lg hover:text-[#8888ee] transition-colors font-light flex items-center">
+                                      {lead.email}
+                                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Phone Number</p>
+                                    <a href={`tel:${lead.phone}`} className="text-white text-lg hover:text-[#9999ff] transition-colors font-light flex items-center">
+                                      {lead.phone}
+                                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Business Information Section */}
+                              <div className="mb-8">
+                                <h4 className="text-lg font-normal text-[#9999ff] mb-4 flex items-center">
+                                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                  </svg>
+                                  Business Information
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black/40 p-6 rounded-xl border border-[#9999ff]/10">
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Business Name</p>
+                                    <p className="text-white text-lg font-light">{lead.businessName}</p>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Instagram Handle</p>
+                                    <a 
+                                      href={`https://instagram.com/${lead.instagramHandle.replace('@', '')}`} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="text-[#9999ff] text-lg hover:text-[#8888ee] transition-colors font-light flex items-center"
+                                    >
+                                      {lead.instagramHandle}
+                                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Business Type</p>
+                                    <p className="text-white text-lg font-light capitalize">{lead.businessType}</p>
+                                  </div>
+                                  <div className="space-y-1">
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider">Budget Range</p>
+                                    <p className="text-white text-lg font-light">{lead.budget}</p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Services Section */}
+                              <div className="mb-8">
+                                <h4 className="text-lg font-normal text-[#9999ff] mb-4 flex items-center">
+                                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                  </svg>
+                                  Services Interested In
+                                </h4>
+                                <div className="bg-black/40 p-6 rounded-xl border border-[#9999ff]/10">
+                                  <div className="flex flex-wrap gap-3">
+                                    {lead.services.map((service, idx) => (
+                                      <span
+                                        key={idx}
+                                        className="px-4 py-2 bg-[#9999ff]/20 border border-[#9999ff]/40 rounded-full text-sm text-[#9999ff] font-light hover:shadow-[0_0_15px_rgba(153,153,255,0.4)] transition-all"
+                                      >
+                                        {service}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Goals Section */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-normal text-[#9999ff] mb-4 flex items-center">
+                                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                  </svg>
+                                  Biggest Goal
+                                </h4>
+                                <div className="bg-black/40 p-6 rounded-xl border border-[#9999ff]/10">
+                                  <p className="text-white text-base font-light leading-relaxed">{lead.biggestGoal}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Footer with actions */}
+                            <div className="bg-black/50 px-8 py-6 border-t border-[#9999ff]/20 flex justify-between items-center">
+                              <div className="flex gap-3">
+                                <a
+                                  href={`mailto:${lead.email}`}
+                                  className="px-6 py-2.5 bg-[#9999ff]/20 border border-[#9999ff]/40 text-[#9999ff] rounded-full hover:bg-[#9999ff]/30 hover:shadow-[0_0_20px_rgba(153,153,255,0.4)] transition-all flex items-center gap-2 font-light"
+                                >
+                                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                  </svg>
+                                  Send Email
+                                </a>
+                                <a
+                                  href={`tel:${lead.phone}`}
+                                  className="px-6 py-2.5 bg-[#9999ff]/20 border border-[#9999ff]/40 text-[#9999ff] rounded-full hover:bg-[#9999ff]/30 hover:shadow-[0_0_20px_rgba(153,153,255,0.4)] transition-all flex items-center gap-2 font-light"
+                                >
+                                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                  </svg>
+                                  Call Now
+                                </a>
+                              </div>
                               <button
                                 onClick={() => {
                                   const modal = document.getElementById(`modal-${lead._id}`);
                                   if (modal) (modal as HTMLDialogElement).close();
                                 }}
-                                className="px-6 py-2 bg-[#9999ff] text-white rounded-full hover:shadow-[0_0_20px_rgba(153,153,255,0.6)] transition-all"
+                                className="px-8 py-2.5 bg-[#9999ff] text-white rounded-full hover:shadow-[0_0_25px_rgba(153,153,255,0.6)] transition-all font-light"
                               >
                                 Close
                               </button>
