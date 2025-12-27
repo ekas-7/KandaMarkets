@@ -37,7 +37,7 @@ export default function ThankYouPage() {
         backgroundRepeat: "no-repeat, repeat, repeat",
       }}
     >
-      <div className="max-w-3xl mx-auto w-full text-center">
+      <div className="max-w-5xl mx-auto w-full text-center">
         <div className="thank-you-content relative">
           {/* Animated Grid Background Effect */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -98,37 +98,37 @@ export default function ThankYouPage() {
                 What happens next?
               </h2>
               
-              <div className="space-y-4 text-left max-w-lg mx-auto">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-sm">
+              <div className="grid md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+                <div className="flex flex-col gap-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-base">
                     1
                   </div>
                   <div>
-                    <h3 className="text-white font-normal mb-1">We'll audit your profile</h3>
+                    <h3 className="text-white font-normal mb-2 text-base sm:text-lg">We'll audit your profile</h3>
                     <p className="text-gray-400 text-sm font-light">
                       Our team will review your Instagram and business details.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-sm">
+                <div className="flex flex-col gap-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-base">
                     2
                   </div>
                   <div>
-                    <h3 className="text-white font-normal mb-1">Get contacted</h3>
+                    <h3 className="text-white font-normal mb-2 text-base sm:text-lg">Get contacted</h3>
                     <p className="text-gray-400 text-sm font-light">
                       We'll reach out via WhatsApp or email to schedule a call.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-sm">
+                <div className="flex flex-col gap-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#9999ff]/20 flex items-center justify-center text-[#9999ff] font-normal text-base">
                     3
                   </div>
                   <div>
-                    <h3 className="text-white font-normal mb-1">Free strategy session</h3>
+                    <h3 className="text-white font-normal mb-2 text-base sm:text-lg">Free strategy session</h3>
                     <p className="text-gray-400 text-sm font-light">
                       We'll discuss your goals and create a custom growth plan.
                     </p>
