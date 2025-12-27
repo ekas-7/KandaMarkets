@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Poppins, EB_Garamond } from 'next/font/google';
+import AutoClickTracker from "@/components/AutoClickTracker";
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`dark ${poppins.variable} ${ebGaramond.variable}`}>
       <head />
       <body className={`${poppins.className} bg-black text-white`} suppressHydrationWarning>
+        <AutoClickTracker />
         {children}
       </body>
     </html>

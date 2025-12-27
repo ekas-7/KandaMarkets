@@ -7,8 +7,17 @@ export interface PageView {
   timestamp: Date;
   userAgent?: string;
   referrer?: string;
+  referrerCategory?: 'direct' | 'search' | 'social' | 'email' | 'referral' | 'campaign' | 'internal';
+  referrerSource?: string;
+  searchKeywords?: string;
   country?: string;
+  countryCode?: string;
   city?: string;
+  region?: string;
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+  ip?: string;
   device?: 'mobile' | 'tablet' | 'desktop';
   browser?: string;
   os?: string;
@@ -73,11 +82,15 @@ export interface UserSession {
   lastSeen: Date;
   pageViews: number;
   country?: string;
+  countryCode?: string;
   city?: string;
+  region?: string;
   device?: 'mobile' | 'tablet' | 'desktop';
   browser?: string;
   os?: string;
   referrer?: string;
+  referrerCategory?: 'direct' | 'search' | 'social' | 'email' | 'referral' | 'campaign' | 'internal';
+  referrerSource?: string;
   converted: boolean;
   sessionDuration?: number; // milliseconds
   pagesVisited?: string[]; // ordered array of pages
