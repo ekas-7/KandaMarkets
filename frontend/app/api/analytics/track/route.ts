@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { getClientIP, getGeolocationAlternative } from '@/lib/geolocation';
+import { categorizeReferrer, extractSearchKeywords } from '@/lib/referrerUtils';
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,23 +12,45 @@ export async function POST(request: NextRequest) {
 
     const timestamp = new Date();
 
+    // Get IP and geolocation for pageview events
+    let geoData: any = {};
+    if (eventType === 'pageview') {
+      const clientIP = getClientIP(request);
+      if (clientIP) {
+        geoData = await getGeolocationAlternative(clientIP);
+      }
+    }
+
     switch (eventType) {
       case 'pageview': {
         const { 
-          sessionId, page, userAgent, referrer, country, city, device,
+          sessionId, page, userAgent, referrer, device,
           browser, os, screenResolution, utmSource, utmMedium, utmCampaign,
           utmTerm, utmContent, entryPage
         } = data;
         
-        // Insert page view
+        // Categorize referrer
+        const referrerInfo = categorizeReferrer(referrer, utmSource);
+        const searchKeywords = extractSearchKeywords(referrer);
+        
+        // Insert page view with geo data
         await db.collection('pageViews').insertOne({
           sessionId,
           page,
           timestamp,
           userAgent,
           referrer,
-          country,
-          city,
+          referrerCategory: referrerInfo.category,
+          referrerSource: referrerInfo.source,
+          searchKeywords,
+          country: geoData.country,
+          countryCode: geoData.countryCode,
+          city: geoData.city,
+          region: geoData.region,
+          latitude: geoData.latitude,
+          longitude: geoData.longitude,
+          timezone: geoData.timezone,
+          ip: geoData.ip,
           device,
           browser,
           os,
@@ -44,10 +68,14 @@ export async function POST(request: NextRequest) {
           $set: {
             lastSeen: timestamp,
             device,
-            country,
-            city,
+            country: geoData.country,
+            countryCode: geoData.countryCode,
+            city: geoData.city,
+            region: geoData.region,
             browser,
             os,
+            referrerCategory: referrerInfo.category,
+            referrerSource: referrerInfo.source,
           },
           $setOnInsert: {
             firstSeen: timestamp,
