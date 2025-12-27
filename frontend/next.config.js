@@ -14,6 +14,10 @@ const nextConfig = {
       },
     ];
   },
+  // Allow development access from local network
+  experimental: {
+    allowedOrigins: ['172.20.10.8:3000'],
+  },
 };
 
 module.exports = nextConfig;

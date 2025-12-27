@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import StatsPanel from "@/components/StatsPanel";
+import EnhancedStatsPanel from "@/components/EnhancedStatsPanel";
 
 export default function StatsPage() {
   const { data: session, status } = useSession();
@@ -39,5 +39,5 @@ export default function StatsPage() {
     return null;
   }
 
-  return <StatsPanel />;
+  return <EnhancedStatsPanel />;
 }

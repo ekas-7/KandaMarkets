@@ -13,20 +13,42 @@ interface AnalyticsData {
     totalFormSubmissions: number;
     conversions: number;
     conversionRate: number;
-    avgPagesPerSession: string;
+    bounceRate: number;
+    avgSessionDuration: number;
+    avgPagesPerSession: number;
+    returningVisitors: number;
+    newVisitors: number;
+    activeVisitors: number;
   };
-  pageViewsByPage: { page: string; views: number }[];
-  topClickedElements: { elementId: string; elementType: string; clicks: number }[];
+  pageViewsByPage: { page: string; views: number; avgTimeOnPage: number }[];
+  entryPages: { page: string; count: number }[];
+  exitPages: { page: string; count: number }[];
+  topClickedElements: { elementId: string; elementType: string; elementText: string; clicks: number }[];
   deviceBreakdown: Record<string, number>;
+  browserBreakdown: { browser: string; count: number }[];
+  osBreakdown: { os: string; count: number }[];
+  countryBreakdown: { country: string; visitors: number }[];
+  cityBreakdown: { city: string; country: string; visitors: number }[];
+  utmSources: { source: string; visitors: number; conversions: number; conversionRate: string }[];
+  utmCampaigns: { campaign: string; visitors: number; conversions: number; conversionRate: string }[];
   dailyStats: { date: string; views: number }[];
-  dailyVisitors: { date: string; visitors: number }[];
-  topReferrers: { referrer: string; count: number }[];
+  dailyVisitors: { date: string; visitors: number; conversions: number }[];
+  topReferrers: { referrer: string; count: number; conversions: number }[];
+  userFlows: { path: string; count: number }[];
+  scrollDepth: { page: string; avgMaxScroll: number; sessions: number }[];
+  formAnalytics: {
+    abandonments: { formId: string; interactions: number; uniqueSessions: number }[];
+    submissions: { formType: string; total: number; successful: number; successRate: string; avgTimeTaken: number }[];
+  };
+  recentConversions: { formType: string; timestamp: string }[];
   recentActivity: {
     sessionId: string;
     page: string;
     timestamp: string;
     device?: string;
     country?: string;
+    city?: string;
+    browser?: string;
   }[];
 }
 
@@ -52,7 +74,7 @@ export default function StatsPanel() {
   const fetchAnalytics = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`/api/admin/analytics?period=${period}`);
+      const response = await fetch(`/api/admin/analytics-enhanced?period=${period}`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch analytics");
