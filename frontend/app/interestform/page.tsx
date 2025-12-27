@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { useGsapTimeline } from "@/hooks/useGSAP";
 import { useRouter } from "next/navigation";
+import { trackPageView, trackFormSubmission } from "@/lib/analytics";
 
 export default function InterestFormPage() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -21,6 +22,11 @@ export default function InterestFormPage() {
     budget: "",
     biggestGoal: ""
   });
+
+  useEffect(() => {
+    // Track page view when component mounts
+    trackPageView('/interestform');
+  }, []);
 
   useGsapTimeline(sectionRef, ({ gsap }) => {
     const tl = gsap.timeline({
@@ -70,16 +76,22 @@ export default function InterestFormPage() {
 
       if (response.ok) {
         setSubmitStatus('success');
+        // Track successful form submission
+        trackFormSubmission('interest-form', '/interestform', true);
         // Redirect to thank you page after a short delay
         setTimeout(() => {
           router.push('/interestform/thank-you');
         }, 1000);
       } else {
         setSubmitStatus('error');
+        // Track failed form submission
+        trackFormSubmission('interest-form', '/interestform', false);
         console.error('Error submitting form:', data.error);
       }
     } catch (error) {
       setSubmitStatus('error');
+      // Track failed form submission
+      trackFormSubmission('interest-form', '/interestform', false);
       console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);

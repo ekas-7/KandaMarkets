@@ -141,13 +141,22 @@ export default function AdminDashboard() {
               Manage and view all lead submissions
             </p>
           </div>
-          <Button
-            onClick={handleSignOut}
-            variant={null as any}
-            className="bg-red-500 text-white hover:bg-red-600 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm px-6 py-2.5"
-          >
-            Sign Out
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              onClick={() => router.push('/theauthadminkanda/stats')}
+              variant={null as any}
+              className="bg-[#9999ff] text-white hover:bg-[#8888ee] transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm px-6 py-2.5"
+            >
+               Analytics
+            </Button>
+            <Button
+              onClick={handleSignOut}
+              variant={null as any}
+              className="bg-red-500 text-white hover:bg-red-600 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm px-6 py-2.5"
+            >
+              Sign Out
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}
