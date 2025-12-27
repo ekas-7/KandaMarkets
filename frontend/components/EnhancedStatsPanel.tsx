@@ -15,7 +15,7 @@ interface AnalyticsData {
     conversionRate: number;
     bounceRate: number;
     avgSessionDuration: number;
-    avgPagesPerSession: number;
+    avgPagesPerSession: string; // Returned as string from API
     returningVisitors: number;
     newVisitors: number;
     activeVisitors: number;
@@ -217,7 +217,7 @@ export default function EnhancedStatsPanel() {
           <StatCard
             title="Avg Session"
             value={formatDuration(analytics.summary.avgSessionDuration)}
-            subtitle={`${analytics.summary.avgPagesPerSession.toFixed(1)} pages/session`}
+            subtitle={`${analytics.summary.avgPagesPerSession} pages/session`}
           />
         </div>
 
