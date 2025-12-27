@@ -57,6 +57,7 @@ export default function HeroSection() {
                 variant={null as any}
                 className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 w-full sm:w-auto" 
                 size="lg"
+                data-track-name="Contact Cal.com CTA"
               >
                 Contact on Cal.com
               </Button>
@@ -66,6 +67,7 @@ export default function HeroSection() {
                   variant={null as any}
                   className="bg-transparent border-2 border-[#9999ff] text-[#9999ff] hover:bg-[#9999ff]/10 hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 w-full sm:w-auto" 
                   size="lg"
+                  data-track-name="Get Free Strategy Call"
                 >
                   Get Free Strategy Call
                 </Button>

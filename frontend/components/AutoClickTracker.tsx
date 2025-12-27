@@ -27,11 +27,13 @@ export default function AutoClickTracker() {
         elementType = element.getAttribute('role') || tagName;
       }
       
-      // Get element identifier
+      // Get element identifier - prioritize data-track-name for readable analytics
       const elementId = 
+        element.getAttribute('data-track-name') || // Custom tracking name (highest priority)
         element.id ||
         element.getAttribute('data-track-id') ||
         element.getAttribute('aria-label') ||
+        element.textContent?.trim().substring(0, 50) || // Use button text as fallback
         element.className ||
         `${tagName}-${Math.random().toString(36).substr(2, 9)}`;
       
