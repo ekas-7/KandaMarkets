@@ -362,6 +362,7 @@ export default function InterestFormPage() {
                     disabled={isSubmitting}
                     className="w-full bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 py-2.5 sm:py-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     size="lg"
+                    data-track-name="Interest Form - Submit Button"
                   >
                     {isSubmitting ? 'Submitting...' : 'Book Free Strategy Call'}
                   </Button>

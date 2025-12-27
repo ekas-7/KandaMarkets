@@ -90,6 +90,7 @@ export default function Footer() {
               variant={null as any}
               className="bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4" 
               size="lg"
+              data-track-name="Footer - Get Free Strategy Call"
             >
               Get Free Strategy Call
             </Button>
@@ -122,6 +123,7 @@ export default function Footer() {
                 key={link.name}
                 href={link.href}
                 className="text-gray-300 hover:text-white transition-colors duration-200 text-xs sm:text-sm md:text-base font-light"
+                data-track-name={`Footer Nav - ${link.name}`}
               >
                 {link.name}
               </a>
@@ -138,6 +140,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
                 aria-label={social.name}
+                data-track-name={`Footer Social - ${social.name}`}
               >
                 <div className="w-5 h-5 md:w-6 md:h-6">
                   {social.icon}
@@ -160,6 +163,7 @@ export default function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[#9999ff] hover:text-brand-300 underline transition-colors duration-200"
+              data-track-name="Footer - GitHub Link"
             >
               ekas-7
             </a>

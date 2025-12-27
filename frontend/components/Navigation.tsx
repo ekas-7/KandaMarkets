@@ -33,16 +33,16 @@ export default function Navigation({ className }: NavigationProps) {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
+          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors" data-track-name="Nav - Strategies">
             Strategies
           </a>
-          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1">
+          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1" data-track-name="Nav - Create Strategy">
             <span>Create strategy</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
           </a>
-          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
+          <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors" data-track-name="Nav - About">
             About
           </a>
         </div>
@@ -52,6 +52,7 @@ export default function Navigation({ className }: NavigationProps) {
           className="md:hidden text-white p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          data-track-name="Mobile Menu Toggle"
         >
           {mobileMenuOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,16 +70,16 @@ export default function Navigation({ className }: NavigationProps) {
       {mobileMenuOpen && (
         <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
           <div className="flex flex-col gap-4 pt-4">
-            <a href="#" className="text-gray-300 hover:text-white transition-colors py-2">
+            <a href="#" className="text-gray-300 hover:text-white transition-colors py-2" data-track-name="Mobile Nav - Strategies">
               Strategies
             </a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-1 py-2">
+            <a href="#" className="text-gray-300 hover:text-white transition-colors flex items-center gap-1 py-2" data-track-name="Mobile Nav - Create Strategy">
               <span>Create strategy</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
             </a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors py-2">
+            <a href="#" className="text-gray-300 hover:text-white transition-colors py-2" data-track-name="Mobile Nav - About">
               About
             </a>
           </div>
