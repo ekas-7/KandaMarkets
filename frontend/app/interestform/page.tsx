@@ -3,15 +3,23 @@
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useGsapTimeline } from "@/hooks/useGSAP";
+import { useRouter } from "next/navigation";
 
 export default function InterestFormPage() {
   const sectionRef = useRef<HTMLElement>(null);
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
-    company: "",
-    interest: "",
-    message: ""
+    phone: "",
+    businessName: "",
+    instagramHandle: "",
+    services: [] as string[],
+    businessType: "",
+    budget: "",
+    biggestGoal: ""
   });
 
   useGsapTimeline(sectionRef, ({ gsap }) => {
@@ -35,10 +43,47 @@ export default function InterestFormPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCheckboxChange = (service: string) => {
+    setFormData(prev => ({
+      ...prev,
+      services: prev.services.includes(service)
+        ? prev.services.filter(s => s !== service)
+        : [...prev.services, service]
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission here
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Redirect to thank you page after a short delay
+        setTimeout(() => {
+          router.push('/interestform/thank-you');
+        }, 1000);
+      } else {
+        setSubmitStatus('error');
+        console.error('Error submitting form:', data.error);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -90,109 +135,223 @@ export default function InterestFormPage() {
 
           {/* Right Side: Form */}
           <div className="form-container relative">
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-[#9999ff]/20 rounded-2xl p-6 sm:p-8 md:p-10">
-              <h2 className="text-2xl sm:text-3xl font-normal text-white mb-6 sm:mb-8">
+            <div className="bg-gray-900/50 backdrop-blur-sm border border-[#9999ff]/20 rounded-2xl p-4 sm:p-6 md:p-8">
+              <h2 className="text-xl sm:text-2xl font-normal text-white mb-4 sm:mb-6">
                 Get in touch
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name Field */}
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">{/* Success Message */}
+                {submitStatus === 'success' && (
+                  <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                    <p className="text-green-400 text-sm">
+                      ✓ Success! Redirecting...
+                    </p>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {submitStatus === 'error' && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                    <p className="text-red-400 text-sm">
+                      ✗ Something went wrong. Please try again.
+                    </p>
+                  </div>
+                )}
+
+                {/* Name and Email - 2 Column Grid on Desktop */}
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  {/* Full Name Field */}
+                  <div className="form-field">
+                    <label htmlFor="fullName" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      required
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                      placeholder="Your full name"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="form-field">
+                    <label htmlFor="email" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Phone and Business Name - 2 Column Grid */}
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  {/* Phone / WhatsApp Field */}
+                  <div className="form-field">
+                    <label htmlFor="phone" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      Phone / WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+
+                  {/* Business / Brand Name Field */}
+                  <div className="form-field">
+                    <label htmlFor="businessName" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      Business / Brand Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="businessName"
+                      name="businessName"
+                      required
+                      value={formData.businessName}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                      placeholder="Your business name"
+                    />
+                  </div>
+                </div>
+
+                {/* Instagram Handle - Full Width */}
                 <div className="form-field">
-                  <label htmlFor="name" className="block text-sm font-light text-gray-300 mb-2">
-                    Name *
+                  <label htmlFor="instagramHandle" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                    Instagram / Social Media Handle *
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="instagramHandle"
+                    name="instagramHandle"
                     required
-                    value={formData.name}
+                    value={formData.instagramHandle}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
-                    placeholder="Your name"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                    placeholder="@yourbrand"
                   />
                 </div>
 
-                {/* Email Field */}
+                {/* Services Field - Checkboxes in Grid */}
                 <div className="form-field">
-                  <label htmlFor="email" className="block text-sm font-light text-gray-300 mb-2">
-                    Email *
+                  <label className="block text-xs sm:text-sm font-light text-gray-300 mb-2">
+                    What services are you looking for? *
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
-                    placeholder="your.email@example.com"
-                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {[
+                      'Social Media Management',
+                      'Content Creation / Reels Editing',
+                      'Personal Branding',
+                      'Paid Ads',
+                      'Growth Strategy',
+                      'Not sure (Let\'s discuss)'
+                    ].map((service) => (
+                      <label key={service} className="flex items-center gap-2 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          checked={formData.services.includes(service)}
+                          onChange={() => handleCheckboxChange(service)}
+                          className="w-4 h-4 bg-black/50 border border-[#9999ff]/30 rounded text-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20"
+                        />
+                        <span className="text-xs sm:text-sm text-gray-300 group-hover:text-white transition-colors">
+                          {service}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Company Field */}
-                <div className="form-field">
-                  <label htmlFor="company" className="block text-sm font-light text-gray-300 mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
-                    placeholder="Your company (optional)"
-                  />
+                {/* Business Type and Budget - 2 Column Grid */}
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  {/* Business Type Field */}
+                  <div className="form-field">
+                    <label htmlFor="businessType" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      What best describes you? *
+                    </label>
+                    <select
+                      id="businessType"
+                      name="businessType"
+                      required
+                      value={formData.businessType}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                    >
+                      <option value="">Select an option</option>
+                      <option value="creator">Creator / Personal Brand</option>
+                      <option value="startup">Startup / Small Business</option>
+                      <option value="coach">Coach / Consultant</option>
+                      <option value="ecommerce">E-commerce Brand</option>
+                      <option value="agency">Agency / Other</option>
+                    </select>
+                  </div>
+
+                  {/* Budget Field */}
+                  <div className="form-field">
+                    <label htmlFor="budget" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                      Monthly marketing budget? *
+                    </label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      required
+                      value={formData.budget}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
+                    >
+                      <option value="">Select budget</option>
+                      <option value="10k-25k">₹10k – ₹25k</option>
+                      <option value="25k-50k">₹25k – ₹50k</option>
+                      <option value="50k-1L">₹50k – ₹1L</option>
+                      <option value="1L+">₹1L+</option>
+                      <option value="not-sure">Not sure yet</option>
+                    </select>
+                  </div>
                 </div>
 
-                {/* Interest Field */}
+                {/* Biggest Goal Field */}
                 <div className="form-field">
-                  <label htmlFor="interest" className="block text-sm font-light text-gray-300 mb-2">
-                    I'm interested in *
-                  </label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    required
-                    value={formData.interest}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/50 border border-[#9999ff]/30 rounded-lg text-white focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300"
-                  >
-                    <option value="">Select an option</option>
-                    <option value="joining">Joining the community</option>
-                    <option value="partnership">Partnership opportunities</option>
-                    <option value="consulting">Consulting services</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                {/* Message Field */}
-                <div className="form-field">
-                  <label htmlFor="message" className="block text-sm font-light text-gray-300 mb-2">
-                    Message *
+                  <label htmlFor="biggestGoal" className="block text-xs sm:text-sm font-light text-gray-300 mb-1.5">
+                    What is your biggest goal right now? *
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
+                    id="biggestGoal"
+                    name="biggestGoal"
                     required
-                    value={formData.message}
+                    value={formData.biggestGoal}
                     onChange={handleChange}
-                    rows={4}
-                    className="w-full px-4 py-3 bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300 resize-none"
-                    placeholder="Tell us about your ideas..."
+                    rows={2}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm bg-black/50 border border-[#9999ff]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#9999ff] focus:ring-2 focus:ring-[#9999ff]/20 transition-all duration-300 resize-none"
+                    placeholder="E.g., More leads, Brand visibility..."
                   />
                 </div>
 
                 {/* Submit Button */}
-                <div className="form-field pt-4">
+                <div className="form-field pt-2">
                   <Button
                     variant={null as any}
                     type="submit"
-                    className="w-full bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#9999ff] text-white hover:shadow-[0_0_30px_rgba(153,153,255,0.8)] hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base px-6 py-2.5 sm:py-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     size="lg"
                   >
-                    Send Message
+                    {isSubmitting ? 'Submitting...' : 'Book Free Strategy Call'}
                   </Button>
                 </div>
               </form>
