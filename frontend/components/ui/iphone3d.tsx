@@ -141,8 +141,8 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.15;
       
       // Hover effect - slight scale up (reduced to prevent overflow)
-      const targetScale = hovered ? 0.6 : 0.58;
-      const currentScale = groupRef.current.scale.x;
+      const targetScale = hovered ? 0.55 : 0.52;
+      const currentScale = groupRef.current.scale.x
       groupRef.current.scale.setScalar(currentScale + (targetScale - currentScale) * 0.1);
     }
   });
