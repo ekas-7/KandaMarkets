@@ -18,25 +18,25 @@ export default function CuratedContent() {
   {
     id: 1,
     src: "/videos/video1.mp4",
-    caption: "A million dollar brand owner just",
+    caption: "HeyGen & ElevenLabs Generated ",
     highlight: "million",
   },
   {
     id: 2,
     src: "/videos/video2.mp4",
-    caption: "We pulled years of expertise from",
+    caption: "Desi Minimals Clothing Style",
     highlight: "expertise",
   },
   {
     id: 3,
     src: "/videos/video3.mp4",
-    caption: "you really wanted was comfort.",
+    caption: "3D Blender Coffee Add",
     highlight: "wanted",
   },
   {
     id: 4,
     src: "/videos/video4.mp4",
-    caption: "These moments aren't just about utility",
+    caption: "Kanda Speaks Editing Work",
     highlight: "aren't",
   },
 ];
