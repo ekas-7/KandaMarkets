@@ -76,6 +76,16 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       texture.center.set(0.5, 0.5);
       texture.rotation = Math.PI; // 180 degrees in radians
       
+      // For 9:16 video - ensure texture wrapping is set correctly
+      texture.wrapS = THREE.ClampToEdgeWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      
+      // Scale up the texture to fill the screen properly
+      // The model's UV mapping might be causing the video to appear smaller
+      // Increase repeat values to zoom in on the video
+      texture.repeat.set(1, 1);
+      texture.offset.set(0, 0);
+      
       videoRef.current = video;
       setVideoTexture(texture);
 
@@ -96,6 +106,44 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
           // Look for the screen mesh - trying multiple possible names
           if (child.name === 'Object_18' || child.name === 'Object_94') {
             // console.log('Found Screen mesh:', child.name);
+            
+            // Clone the geometry to modify UVs without affecting original
+            const geometry = child.geometry.clone();
+            
+            // Get UV attribute
+            const uvAttribute = geometry.getAttribute('uv');
+            if (uvAttribute) {
+              // Find the min/max UV values to normalize them
+              let minU = Infinity, maxU = -Infinity;
+              let minV = Infinity, maxV = -Infinity;
+              
+              for (let i = 0; i < uvAttribute.count; i++) {
+                const u = uvAttribute.getX(i);
+                const v = uvAttribute.getY(i);
+                minU = Math.min(minU, u);
+                maxU = Math.max(maxU, u);
+                minV = Math.min(minV, v);
+                maxV = Math.max(maxV, v);
+              }
+              
+              // Create new UV array with normalized values (0 to 1)
+              const uvArray = new Float32Array(uvAttribute.array.length);
+              const rangeU = maxU - minU || 1;
+              const rangeV = maxV - minV || 1;
+              
+              for (let i = 0; i < uvAttribute.count; i++) {
+                const u = uvAttribute.getX(i);
+                const v = uvAttribute.getY(i);
+                
+                // Normalize UVs to 0-1 range
+                uvArray[i * 2] = (u - minU) / rangeU;
+                uvArray[i * 2 + 1] = (v - minV) / rangeV;
+              }
+              
+              geometry.setAttribute('uv', new THREE.BufferAttribute(uvArray, 2));
+            }
+            
+            child.geometry = geometry;
             
             // Apply video texture directly to the Screen mesh
             child.material = new THREE.MeshBasicMaterial({ 
