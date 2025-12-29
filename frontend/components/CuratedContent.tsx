@@ -10,7 +10,7 @@ export default function CuratedContent() {
   const toggleMute = (videoId: number) => {
     setMutedStates((prev) => ({
       ...prev,
-      [videoId]: !prev[videoId],
+      [videoId]: !(prev[videoId] ?? true),
     }));
   };
   
