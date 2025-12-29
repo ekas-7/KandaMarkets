@@ -127,20 +127,20 @@ export default function CuratedContent() {
               </button>
 
               {/* Text overlay - middle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
+              {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-3 sm:px-4 md:px-6">
                 <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-medium leading-tight">
                   {video.caption.split(video.highlight)[0]}
                   <span className="text-[#9999ff] italic font-light font-eb-garamond">{video.highlight}</span>
                   {video.caption.split(video.highlight)[1]}
                 </p>
-              </div>
+              </div> */}
 
               {/* Caption at bottom */}
-              <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
+              {/* <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
                 <p className="text-white text-xs sm:text-sm leading-tight font-light">
                   {video.caption}
                 </p>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
