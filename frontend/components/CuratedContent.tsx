@@ -17,13 +17,13 @@ export default function CuratedContent() {
   const videos = [
   {
     id: 1,
-    src: "/videos/video3.mp4",
+    src: "/videos/video1.mp4",
     caption: "A million dollar brand owner just",
     highlight: "million",
   },
   {
     id: 2,
-    src: "/videos/video3.mp4",
+    src: "/videos/video2.mp4",
     caption: "We pulled years of expertise from",
     highlight: "expertise",
   },
@@ -35,7 +35,7 @@ export default function CuratedContent() {
   },
   {
     id: 4,
-    src: "/videos/video3.mp4",
+    src: "/videos/video4.mp4",
     caption: "These moments aren't just about utility",
     highlight: "aren't",
   },
