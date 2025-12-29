@@ -167,12 +167,12 @@ export default function HighLevelRepurposing() {
                   {/* Right Side: Discover Button - Fades In on Hover - Hidden on small mobile */}
                   <div 
                     className="hidden sm:block"
-                    style={{
+                    {/* style={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(20px)',
                       transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                       willChange: hoveredIndex === index ? 'opacity, transform' : 'auto',
-                    }}
+                    }} */}
                   >
                     <button className="px-4 md:px-6 py-1.5 md:py-2 border-2 border-white text-white rounded-full text-xs font-medium tracking-wider uppercase hover:bg-white hover:text-black transition-all duration-300">
                       Discover
