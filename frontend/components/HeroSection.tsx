@@ -33,7 +33,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center pt-8 sm:pt-12 pb-20 sm:pb-32 md:pb-60 px-4 sm:px-6 md:px-8 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pb-20 sm:pb-32 md:pb-60 px-4 sm:px-6 md:px-8 overflow-hidden bg-black"
       style={{
         background: 'linear-gradient(to top, rgba(153, 153, 255, 0.125), transparent), black'
       }}
@@ -76,7 +76,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Side: iPhone with Floating Badges */}
-          <div className="hero-device relative flex items-center justify-center h-[450px] xs:h-[500px] sm:h-[550px] md:h-[650px] lg:h-[750px] mt-8 lg:mt-0 overflow-hidden">
+          <div className="hero-device relative flex items-center justify-center h-[450px] xs:h-[500px] sm:h-[550px] md:h-[650px] lg:h-[750px] mt-0 lg:mt-0 overflow-hidden">
             <div className="w-full h-full max-w-[400px] mx-auto">
               <Iphone3D videoSrc="/videos/main_phone3.mp4" />
             </div>
