@@ -10,21 +10,21 @@ export default function HighLevelRepurposing() {
 
   const services = [
     {
-      title: "BESPOKE\nDEVELOPMENT",
+      title: "BRAND\nSTRATEGY",
       image: "/vr-placeholder.jpg",
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       barColor: "from-blue-400 via-purple-400",
       align: "left",
     },
     {
-      title: "VR\nINSTALLATIONS",
+      title: "CONCEPT &\nSCRIPTING",
       image: "/vr-placeholder.jpg",
       gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
       barColor: "from-pink-400 via-red-400",
       align: "right",
     },
     {
-      title: "INFINITE\nDESTINATIONS",
+      title: "POST PRODUCTION\n& EDITING",
       image: "/vr-placeholder.jpg",
       gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
       barColor: "from-cyan-400 via-blue-400",
@@ -38,7 +38,7 @@ export default function HighLevelRepurposing() {
       align: "right",
     },
     {
-      title: "BRAND\nSTRATEGY",
+      title: "CAMPAIGN\nSTRATEGY",
       image: "/vr-placeholder.jpg",
       gradient: "linear-gradient(135deg, #30cfd0 0%, #330867 100%)",
       barColor: "from-purple-400 via-cyan-400",
@@ -264,10 +264,10 @@ export default function HighLevelRepurposing() {
 
         {/* Bottom Subtitle */}
         <div className="mt-12 md:mt-16 text-center">
-          <p className="repurpose-footer text-xs sm:text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
+          {/* <p className="repurpose-footer text-xs sm:text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
              style={{ fontFamily: 'var(--font-family-sans)' }}>
             Hover to explore our innovative solutions across multiple platforms
-          </p>
+          </p> */}
         </div>
       </div>
     </section>
