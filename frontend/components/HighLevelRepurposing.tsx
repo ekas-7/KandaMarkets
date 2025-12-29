@@ -264,10 +264,10 @@ export default function HighLevelRepurposing() {
 
         {/* Bottom Subtitle */}
         <div className="mt-12 md:mt-16 text-center">
-          {/* <p className="repurpose-footer text-xs sm:text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
+          <p className="repurpose-footer text-xs sm:text-sm md:text-base text-gray-500 max-w-2xl mx-auto" 
              style={{ fontFamily: 'var(--font-family-sans)' }}>
             Hover to explore our innovative solutions across multiple platforms
-          </p> */}
+          </p>
         </div>
       </div>
     </section>
