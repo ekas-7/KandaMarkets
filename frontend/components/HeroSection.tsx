@@ -76,8 +76,8 @@ export default function HeroSection() {
           </div>
 
           {/* Right Side: iPhone with Floating Badges */}
-          <div className="hero-device relative flex items-center justify-center h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
-            <div className="w-full h-full max-w-[280px] xs:max-w-[320px] sm:max-w-full mx-auto">
+          <div className="hero-device relative flex items-center justify-center h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] mt-8 lg:mt-0 overflow-hidden">
+            <div className="w-full h-full max-w-[400px] mx-auto">
               <Iphone3D videoSrc="/videos/main_phone.mp4" />
             </div>
             
