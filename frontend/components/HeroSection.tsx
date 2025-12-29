@@ -33,7 +33,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 pb-20 sm:pb-32 md:pb-60 px-4 sm:px-6 md:px-8 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-8 sm:pt-12 pb-20 sm:pb-32 md:pb-60 px-4 sm:px-6 md:px-8 overflow-hidden bg-black"
       style={{
         background: 'linear-gradient(to top, rgba(153, 153, 255, 0.125), transparent), black'
       }}
