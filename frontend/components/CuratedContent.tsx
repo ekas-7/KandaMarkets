@@ -7,31 +7,31 @@ export default function CuratedContent() {
   const sectionRef = useRef<HTMLElement>(null);
   
   const videos = [
-    {
-      id: 1,
-      thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&fit=crop",
-      caption: "A million dollar brand owner just",
-      highlight: "million",
-    },
-    {
-      id: 2,
-      thumbnail: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=600&fit=crop",
-      caption: "We pulled years of expertise from",
-      highlight: "expertise",
-    },
-    {
-      id: 3,
-      thumbnail: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=600&fit=crop",
-      caption: "you really wanted was comfort.",
-      highlight: "wanted",
-    },
-    {
-      id: 4,
-      thumbnail: "https://images.unsplash.com/photo-1600878459305-8a2b2c2c4c7e?w=400&h=600&fit=crop",
-      caption: "These moments aren't just about utility",
-      highlight: "aren't",
-    },
-  ];
+  {
+    id: 1,
+    src: "/videos/video1.mp4",
+    caption: "A million dollar brand owner just",
+    highlight: "million",
+  },
+  {
+    id: 2,
+    src: "/videos/video2.mp4",
+    caption: "We pulled years of expertise from",
+    highlight: "expertise",
+  },
+  {
+    id: 3,
+    src: "/videos/video3.mp4",
+    caption: "you really wanted was comfort.",
+    highlight: "wanted",
+  },
+  {
+    id: 4,
+    src: "/videos/video4.mp4",
+    caption: "These moments aren't just about utility",
+    highlight: "aren't",
+  },
+];
 
   useGsapTimeline(sectionRef, ({ gsap }) => {
     const cards = gsap.utils.toArray<HTMLElement>(".curated-card");
@@ -88,11 +88,14 @@ export default function CuratedContent() {
             >
               {/* Video Thumbnail */}
               <div className="absolute inset-0">
-                <img
-                  src={video.thumbnail}
-                  alt={video.caption}
-                  className="w-full h-full object-cover"
-                />
+                <video 
+                  src={video.src}
+                  className="w-full h-full object-cover" 
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  />
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               </div>
