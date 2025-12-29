@@ -102,7 +102,7 @@ export default function ClientTestimonials() {
       .from(".testimonial-heading", { y: 40, opacity: 0, duration: 0.75 }, "-=0.2")
       .from(".testimonial-sub", { y: 24, opacity: 0, duration: 0.6 }, "-=0.25")
       .from(".testimonial-card", { y: 40, opacity: 0, duration: 0.7, stagger: 0.08 }, "-=0.2")
-      .from(".testimonial-cta", { y: 30, opacity: 0, duration: 0.7 }, "-=0.4");
+  
   }, []);
 
   return (

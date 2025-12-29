@@ -25,10 +25,10 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
   // Debug: Log all mesh names to find the screen
   React.useEffect(() => {
     if (scene) {
-      console.log('=== iPhone Model Meshes ===');
+      // console.log('=== iPhone Model Meshes ===');
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          console.log('Mesh name:', child.name, 'Material:', child.material?.name);
+          // console.log('Mesh name:', child.name, 'Material:', child.material?.name);
         }
       });
     }
@@ -53,13 +53,15 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('Video playing successfully');
+            // console.log('Video playing successfully');
           })
           .catch(error => {
-            console.log('Video autoplay failed, attempting to play again:', error);
+            // console.log('Video autoplay failed, attempting to play again:', error);
             // Try playing with user interaction
             setTimeout(() => {
-              video.play().catch(e => console.log('Retry failed:', e));
+              video.play().catch(e => {
+                // console.log('Retry failed:', e)
+              });
             }, 100);
           });
       }
@@ -89,11 +91,11 @@ function IPhoneModel({ videoSrc }: IPhone3DProps) {
     if (videoTexture && scene) {
       scene.traverse((child: any) => {
         if (child instanceof THREE.Mesh) {
-          console.log('Checking mesh:', child.name);
+          // console.log('Checking mesh:', child.name);
           
           // Look for the screen mesh - trying multiple possible names
           if (child.name === 'Object_18' || child.name === 'Object_94') {
-            console.log('Found Screen mesh:', child.name);
+            // console.log('Found Screen mesh:', child.name);
             
             // Apply video texture directly to the Screen mesh
             child.material = new THREE.MeshBasicMaterial({ 

@@ -99,7 +99,7 @@ export default function CuratedContent() {
                 <video 
                   src={video.src}
                   className="w-full h-full object-cover" 
-                  muted={mutedStates[video.id] !== false}
+                  muted={mutedStates[video.id] ?? true}
                   loop
                   autoPlay
                   playsInline
