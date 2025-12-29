@@ -136,11 +136,11 @@ export default function CuratedContent() {
               </div> */}
 
               {/* Caption at bottom */}
-              {/* <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
+              <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
                 <p className="text-white text-xs sm:text-sm leading-tight font-light">
                   {video.caption}
                 </p>
-              </div> */}
+              </div>
             </div>
           ))}
         </div>
