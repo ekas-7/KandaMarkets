@@ -8,23 +8,23 @@ export default function TrailersLongForm() {
   const [, setHov] = useState<number | null>(null);
 
   const vids = [
-    {
-      id: 1,
-      thumb: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
-      cap: "for exactly what you have to",
-    },
-    {
-      id: 2,
-      thumb: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-      cap: "Looking for success",
-      ctrl: true,
-    },
-    {
-      id: 3,
-      thumb: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop",
-      cap: "the trade-off between health, happiness,",
-    },
-  ];
+  {
+    id: 1,
+    src: "/longform/podcast1.mp4",
+    cap: "for exactly what you have to",
+  },
+  {
+    id: 2,
+    src: "/longform/podcast2.mp4",
+    cap: "Looking for success",
+    ctrl: true,
+  },
+  {
+    id: 3,
+    src: "/longform/podcast3.mp4",
+    cap: "the trade-off between health, happiness,",
+  },
+];
 
   useGsapTimeline(ref, ({ gsap }) => {
     const tl = gsap.timeline({
@@ -74,10 +74,14 @@ export default function TrailersLongForm() {
                 onMouseEnter={() => setHov(v.id)}
                 onMouseLeave={() => setHov(null)}
               >
-                  <img
-                    src={v.thumb}
-                    alt={v.cap}
-                    className="w-full h-full object-cover opacity-80"
+                  <video
+                    src={v.src}
+                    className="w-full h-full object-cover"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="metadata"
                   />
                   
                   {v.ctrl ? (
@@ -144,11 +148,15 @@ export default function TrailersLongForm() {
 
           {/* Right Video */}
           <div className="i-vid w-full relative overflow-hidden rounded-xl md:rounded-2xl bg-gray-900 border border-white/5 shadow-2xl aspect-video">
-              <img
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&h=450&fit=crop"
-                alt="Launch video"
+              <video
+                src="/longform/hero.mp4"
                 className="w-full h-full object-cover opacity-90"
+                muted
+                loop
+                playsInline
+                preload="metadata"
               />
+
               <div className="absolute inset-0 bg-black/40"></div>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
