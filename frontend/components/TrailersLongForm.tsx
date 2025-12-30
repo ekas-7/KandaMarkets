@@ -159,11 +159,11 @@ export default function TrailersLongForm() {
 
               <div className="absolute inset-0 bg-black/40"></div>
 
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
+              {/* <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
                  <p className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium leading-tight max-w-lg">
                   into days of <span className="text-[#9999ff] font-light italic font-eb-garamond">education</span>
                 </p>
-              </div>
+              </div> */}
 
                <div className="absolute bottom-3 md:bottom-4 right-3 md:right-4 text-white hover:text-[#9999ff] cursor-pointer">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="md:w-6 md:h-6"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
